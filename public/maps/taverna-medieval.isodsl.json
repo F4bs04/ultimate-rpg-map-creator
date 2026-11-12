@@ -1,0 +1,735 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "name": "Taverna Medieval (Interno)",
+    "sourceLabel": "taverna-medieval.jpg",
+    "aspectRatio": 0.5967,
+    "createdAt": "2026-11-11T20:04:11.304Z"
+  },
+  "projection": {
+    "label": "Top-Down Battlemap (89.5° / 0°)",
+    "preset": "top_down",
+    "type": "orthographic",
+    "pitchDeg": 89.5,
+    "yawDeg": 0,
+    "fovDeg": 35,
+    "orthoScale": 16,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "terrain": {
+    "width": 9.547,
+    "depth": 16,
+    "subdivisions": 96,
+    "displacementScale": 0.14,
+    "normalStrength": 1.5,
+    "detailBlend": 0.45,
+    "smoothRadius": 2,
+    "invertHeight": false,
+    "heightMode": "luminance",
+    "textureMode": "hybrid",
+    "fallbackMaterial": "wood_plank",
+    "waterEnabled": false,
+    "waterElevation": 0.15
+  },
+  "structures": [
+    {
+      "id": "tav_wall_nw",
+      "name": "Parede Norte (Oeste da Lareira)",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          -4.58,
+          -7.65
+        ],
+        [
+          -1.53,
+          -7.65
+        ],
+        [
+          -1.53,
+          -7.12
+        ],
+        [
+          -4.58,
+          -7.12
+        ]
+      ],
+      "baseElevation": 0.05,
+      "floors": 1,
+      "floorHeight": 2.65,
+      "wallStyle": "timber_frame",
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "flat",
+      "roofPitchDeg": 10,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_wall_ne",
+      "name": "Parede Norte (Janela NE)",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          1.53,
+          -7.65
+        ],
+        [
+          4.58,
+          -7.65
+        ],
+        [
+          4.58,
+          -7.12
+        ],
+        [
+          1.53,
+          -7.12
+        ]
+      ],
+      "baseElevation": 0.05,
+      "floors": 1,
+      "floorHeight": 2.65,
+      "wallStyle": "timber_frame",
+      "windowsPerWall": 1,
+      "hasDoor": false,
+      "roofType": "flat",
+      "roofPitchDeg": 10,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_wall_w",
+      "name": "Parede Oeste",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          -4.66,
+          -7.28
+        ],
+        [
+          -4.37,
+          -7.28
+        ],
+        [
+          -4.37,
+          7.6
+        ],
+        [
+          -4.66,
+          7.6
+        ]
+      ],
+      "baseElevation": 0.05,
+      "floors": 1,
+      "floorHeight": 2.35,
+      "wallStyle": "timber_frame",
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "flat",
+      "roofPitchDeg": 10,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_wall_e",
+      "name": "Parede Leste",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          4.37,
+          -7.28
+        ],
+        [
+          4.66,
+          -7.28
+        ],
+        [
+          4.66,
+          7.6
+        ],
+        [
+          4.37,
+          7.6
+        ]
+      ],
+      "baseElevation": 0.05,
+      "floors": 1,
+      "floorHeight": 2.35,
+      "wallStyle": "timber_frame",
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "flat",
+      "roofPitchDeg": 10,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_wall_sw",
+      "name": "Soleira Sul Oeste",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          -4.49,
+          7.49
+        ],
+        [
+          -0.86,
+          7.49
+        ],
+        [
+          -0.86,
+          7.87
+        ],
+        [
+          -4.49,
+          7.87
+        ]
+      ],
+      "baseElevation": 0.05,
+      "floors": 1,
+      "floorHeight": 0.58,
+      "wallStyle": "timber_frame",
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "flat",
+      "roofPitchDeg": 10,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_wall_se",
+      "name": "Soleira Sul Leste",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          0.86,
+          7.49
+        ],
+        [
+          4.49,
+          7.49
+        ],
+        [
+          4.49,
+          7.87
+        ],
+        [
+          0.86,
+          7.87
+        ]
+      ],
+      "baseElevation": 0.05,
+      "floors": 1,
+      "floorHeight": 0.58,
+      "wallStyle": "timber_frame",
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "flat",
+      "roofPitchDeg": 10,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    }
+  ],
+  "props": [
+    {
+      "id": "tav_hearth",
+      "name": "Lareira Principal",
+      "generator": "fireplace",
+      "position": [
+        0,
+        0.06,
+        -5.76
+      ],
+      "rotationYDeg": 0,
+      "scale": 1.55,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "tav_cupboard_nw",
+      "name": "Armário NW",
+      "generator": "bookshelf",
+      "position": [
+        -3.29,
+        0.06,
+        -5.68
+      ],
+      "rotationYDeg": 0,
+      "scale": 1.05,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_table_n",
+      "name": "Mesa Redonda Norte",
+      "generator": "tavern_table",
+      "position": [
+        -2.31,
+        0.06,
+        -2.21
+      ],
+      "rotationYDeg": 18,
+      "scale": 1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_table_c",
+      "name": "Mesa Redonda Centro",
+      "generator": "tavern_table",
+      "position": [
+        -2.31,
+        0.06,
+        1.92
+      ],
+      "rotationYDeg": 52,
+      "scale": 1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_table_s",
+      "name": "Mesa Redonda Sul",
+      "generator": "tavern_table",
+      "position": [
+        -2.5,
+        0.06,
+        6.11
+      ],
+      "rotationYDeg": -20,
+      "scale": 0.98,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_bar_top",
+      "name": "Balcão L (Retorno Norte)",
+      "generator": "bar_counter",
+      "position": [
+        3.39,
+        0.06,
+        0.4
+      ],
+      "rotationYDeg": 180,
+      "scale": 0.98,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "visible": true
+    },
+    {
+      "id": "tav_bar_mid",
+      "name": "Balcão Principal (Norte)",
+      "generator": "bar_counter",
+      "position": [
+        1.99,
+        0.06,
+        1.84
+      ],
+      "rotationYDeg": -90,
+      "scale": 1.25,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "visible": true
+    },
+    {
+      "id": "tav_bar_bot",
+      "name": "Balcão Principal (Sul)",
+      "generator": "bar_counter",
+      "position": [
+        1.99,
+        0.06,
+        4.72
+      ],
+      "rotationYDeg": -90,
+      "scale": 1.35,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "visible": true
+    },
+    {
+      "id": "tav_rack_n",
+      "name": "Estante Bebidas Norte",
+      "generator": "bookshelf",
+      "position": [
+        4.18,
+        0.06,
+        2.8
+      ],
+      "rotationYDeg": -90,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_rack_s",
+      "name": "Estante Bebidas Sul",
+      "generator": "bookshelf",
+      "position": [
+        4.18,
+        0.06,
+        5.52
+      ],
+      "rotationYDeg": -90,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_stool_1",
+      "name": "Banqueta Bar 1",
+      "generator": "stool",
+      "position": [
+        1,
+        0.06,
+        0.99
+      ],
+      "rotationYDeg": 0,
+      "scale": 0.88,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_stool_2",
+      "name": "Banqueta Bar 2",
+      "generator": "stool",
+      "position": [
+        0.97,
+        0.06,
+        2.21
+      ],
+      "rotationYDeg": 35,
+      "scale": 0.88,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_stool_3",
+      "name": "Banqueta Bar 3",
+      "generator": "stool",
+      "position": [
+        1,
+        0.06,
+        3.65
+      ],
+      "rotationYDeg": 70,
+      "scale": 0.88,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_stool_4",
+      "name": "Banqueta Bar 4",
+      "generator": "stool",
+      "position": [
+        1,
+        0.06,
+        4.88
+      ],
+      "rotationYDeg": 15,
+      "scale": 0.88,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_stool_back",
+      "name": "Banqueta Interna Bar",
+      "generator": "stool",
+      "position": [
+        2.72,
+        0.06,
+        6.16
+      ],
+      "rotationYDeg": 45,
+      "scale": 0.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_nw",
+      "name": "Barril Canto NW",
+      "generator": "barrel",
+      "position": [
+        -3.77,
+        0.06,
+        -4.45
+      ],
+      "rotationYDeg": 25,
+      "scale": 0.78,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_hearth",
+      "name": "Cesto de Lenha",
+      "generator": "barrel",
+      "position": [
+        -2.21,
+        0.06,
+        -4.38
+      ],
+      "rotationYDeg": 12,
+      "scale": 0.72,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_ne1",
+      "name": "Barril Grande NE",
+      "generator": "barrel",
+      "position": [
+        2.37,
+        0.06,
+        -4.93
+      ],
+      "rotationYDeg": 110,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_crate_ne1",
+      "name": "Caixote NE Superior",
+      "generator": "crate",
+      "position": [
+        3.27,
+        0.06,
+        -4.67
+      ],
+      "rotationYDeg": 38,
+      "scale": 0.88,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_ne2",
+      "name": "Barril Pequeno NE",
+      "generator": "barrel",
+      "position": [
+        3.84,
+        0.06,
+        -5.25
+      ],
+      "rotationYDeg": 60,
+      "scale": 0.78,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_ne3",
+      "name": "Barril Médio NE",
+      "generator": "barrel",
+      "position": [
+        3.74,
+        0.06,
+        -3.65
+      ],
+      "rotationYDeg": 145,
+      "scale": 1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_crate_ne2",
+      "name": "Caixote Pequeno Leste",
+      "generator": "crate",
+      "position": [
+        3.27,
+        0.06,
+        -2.56
+      ],
+      "rotationYDeg": 8,
+      "scale": 0.58,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_crate_ne3",
+      "name": "Caixote Grande Leste",
+      "generator": "crate",
+      "position": [
+        3.68,
+        0.06,
+        -1.79
+      ],
+      "rotationYDeg": 4,
+      "scale": 0.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_w1",
+      "name": "Barril Oeste Norte",
+      "generator": "barrel",
+      "position": [
+        -3.8,
+        0.06,
+        -0.16
+      ],
+      "rotationYDeg": 15,
+      "scale": 0.88,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_crate_w1",
+      "name": "Caixote Oeste",
+      "generator": "crate",
+      "position": [
+        -3.15,
+        0.06,
+        0.16
+      ],
+      "rotationYDeg": 18,
+      "scale": 0.66,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_barrel_w2",
+      "name": "Barril Oeste Sul",
+      "generator": "barrel",
+      "position": [
+        -3.74,
+        0.06,
+        0.67
+      ],
+      "rotationYDeg": 95,
+      "scale": 0.92,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_crate_sw",
+      "name": "Caixote Canto SW",
+      "generator": "crate",
+      "position": [
+        -3.74,
+        0.06,
+        7.12
+      ],
+      "rotationYDeg": 28,
+      "scale": 0.92,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tav_sconce_w1",
+      "name": "Arandela Oeste Norte",
+      "generator": "wall_sconce",
+      "position": [
+        -4.32,
+        0.06,
+        -3.01
+      ],
+      "rotationYDeg": 90,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "roof_slate",
+      "visible": true
+    },
+    {
+      "id": "tav_sconce_w2",
+      "name": "Arandela Oeste Sul",
+      "generator": "wall_sconce",
+      "position": [
+        -4.32,
+        0.06,
+        3.52
+      ],
+      "rotationYDeg": 90,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "roof_slate",
+      "visible": true
+    },
+    {
+      "id": "tav_sconce_e1",
+      "name": "Arandela Leste",
+      "generator": "wall_sconce",
+      "position": [
+        4.32,
+        0.06,
+        -2.53
+      ],
+      "rotationYDeg": -90,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "roof_slate",
+      "visible": true
+    }
+  ],
+  "lighting": {
+    "sunAzimuthDeg": 25,
+    "sunElevationDeg": 68,
+    "sunIntensity": 1.25,
+    "ambientIntensity": 0.62,
+    "torchEnabled": true,
+    "torchIntensity": 4.5,
+    "torchColor": "#ff963c"
+  },
+  "worldGrammar": {
+    "scale": "small",
+    "environmentMode": "interior",
+    "seed": 777,
+    "randomness": 0.35,
+    "treeDensity": 0,
+    "minTreeSpacing": 2.5,
+    "poiChance": 0.45,
+    "meanderStrength": 0,
+    "enableBridges": false,
+    "enableRoadContinuation": false,
+    "enableWaterContinuation": false,
+    "enableForestScatter": false,
+    "enableArchitecturalPOIs": true
+  }
+}

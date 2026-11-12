@@ -1,0 +1,1763 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "name": "Vila Medieval no Rio",
+    "sourceLabel": "vila-medieval-rio.jpg",
+    "aspectRatio": 0.7060546875,
+    "createdAt": "2026-11-11T18:59:29.391Z"
+  },
+  "projection": {
+    "label": "Top-Down Battlemap (89.5° / 0°)",
+    "preset": "top_down",
+    "type": "orthographic",
+    "pitchDeg": 89.5,
+    "yawDeg": 0,
+    "fovDeg": 35,
+    "orthoScale": 72,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "terrain": {
+    "width": 50.836,
+    "depth": 72,
+    "subdivisions": 128,
+    "displacementScale": 1.25,
+    "normalStrength": 2.1,
+    "detailBlend": 0.55,
+    "smoothRadius": 2,
+    "invertHeight": false,
+    "heightMode": "semantic_outdoor",
+    "textureMode": "hybrid",
+    "fallbackMaterial": "moss_earth",
+    "waterEnabled": true,
+    "waterElevation": 0.22
+  },
+  "structures": [
+    {
+      "id": "forest_shrine",
+      "name": "Abrigo da Mata NW",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          -19.57,
+          -25.2
+        ],
+        [
+          -17.54,
+          -25.2
+        ],
+        [
+          -17.54,
+          -22.32
+        ],
+        [
+          -19.57,
+          -22.32
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "sawmill_north",
+      "name": "Serraria Norte",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          15.25,
+          -20.88
+        ],
+        [
+          17.79,
+          -20.88
+        ],
+        [
+          17.79,
+          -18.14
+        ],
+        [
+          15.25,
+          -18.14
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "sawmill_south",
+      "name": "Oficina Madeira",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          15.15,
+          -17.42
+        ],
+        [
+          18.05,
+          -17.42
+        ],
+        [
+          18.05,
+          -14.54
+        ],
+        [
+          15.15,
+          -14.54
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "farm_barn_w",
+      "name": "Celeiro Oeste",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          -15.66,
+          -12.96
+        ],
+        [
+          -13.42,
+          -12.96
+        ],
+        [
+          -13.42,
+          -9.36
+        ],
+        [
+          -15.66,
+          -9.36
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "farm_main",
+      "name": "Casa da Fazenda (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          -13.62,
+          -11.52
+        ],
+        [
+          -10.42,
+          -11.52
+        ],
+        [
+          -10.42,
+          -8.78
+        ],
+        [
+          -13.62,
+          -8.78
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.24,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "farm_shed_s",
+      "name": "Anexo Pátio Sul",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          -13.52,
+          -8.06
+        ],
+        [
+          -10.57,
+          -8.06
+        ],
+        [
+          -10.57,
+          -4.9
+        ],
+        [
+          -13.52,
+          -4.9
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "farm_granary",
+      "name": "Celeiro Grande Leste (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          -9.76,
+          -12.67
+        ],
+        [
+          -6.2,
+          -12.67
+        ],
+        [
+          -6.2,
+          -8.93
+        ],
+        [
+          -9.76,
+          -8.93
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.26,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "hip",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "guard_post_n",
+      "name": "Posto Norte",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          0.92,
+          -0.72
+        ],
+        [
+          3.15,
+          -0.72
+        ],
+        [
+          3.15,
+          1.8
+        ],
+        [
+          0.92,
+          1.8
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "hip",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "guild_turret",
+      "name": "Torre da Guilda",
+      "semanticTag": "tower",
+      "footprint": [
+        [
+          1.46,
+          3.82
+        ],
+        [
+          1.24,
+          3.14
+        ],
+        [
+          0.67,
+          2.73
+        ],
+        [
+          -0.05,
+          2.73
+        ],
+        [
+          -0.62,
+          3.14
+        ],
+        [
+          -0.84,
+          3.82
+        ],
+        [
+          -0.62,
+          4.5
+        ],
+        [
+          -0.05,
+          4.91
+        ],
+        [
+          0.67,
+          4.91
+        ],
+        [
+          1.24,
+          4.5
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "buttress",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "cone",
+      "roofPitchDeg": 44,
+      "roofOverhang": 0.25,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "guild_hall",
+      "name": "Salão da Guilda",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          0.41,
+          4.03
+        ],
+        [
+          2.8,
+          4.03
+        ],
+        [
+          2.8,
+          6.34
+        ],
+        [
+          0.41,
+          6.34
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "market_manor",
+      "name": "Casa do Mercado (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          3.86,
+          2.3
+        ],
+        [
+          7.22,
+          2.3
+        ],
+        [
+          7.22,
+          5.18
+        ],
+        [
+          3.86,
+          5.18
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.25,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "hip",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "mid_cottage_a",
+      "name": "Casa Praça Centro",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          2.64,
+          7.34
+        ],
+        [
+          5.29,
+          7.34
+        ],
+        [
+          5.29,
+          9.65
+        ],
+        [
+          2.64,
+          9.65
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "mid_cottage_b",
+      "name": "Casa Praça Leste",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          5.39,
+          7.34
+        ],
+        [
+          7.73,
+          7.34
+        ],
+        [
+          7.73,
+          9.79
+        ],
+        [
+          5.39,
+          9.79
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "inn_west_wing",
+      "name": "Ala Oeste Estalagem",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          2.64,
+          11.09
+        ],
+        [
+          5.39,
+          11.09
+        ],
+        [
+          5.39,
+          13.54
+        ],
+        [
+          2.64,
+          13.54
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "inn_main_2f",
+      "name": "Estalagem Principal (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          5.69,
+          10.66
+        ],
+        [
+          9.46,
+          10.66
+        ],
+        [
+          9.46,
+          13.25
+        ],
+        [
+          5.69,
+          13.25
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.26,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "inn_tower",
+      "name": "Torre Redonda Estalagem",
+      "semanticTag": "tower",
+      "footprint": [
+        [
+          11.17,
+          11.16
+        ],
+        [
+          10.97,
+          10.54
+        ],
+        [
+          10.44,
+          10.16
+        ],
+        [
+          9.8,
+          10.16
+        ],
+        [
+          9.27,
+          10.54
+        ],
+        [
+          9.07,
+          11.16
+        ],
+        [
+          9.27,
+          11.78
+        ],
+        [
+          9.8,
+          12.16
+        ],
+        [
+          10.44,
+          12.16
+        ],
+        [
+          10.97,
+          11.78
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "buttress",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "cone",
+      "roofPitchDeg": 44,
+      "roofOverhang": 0.25,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "inn_south_annex",
+      "name": "Anexo Sul Estalagem",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          6.86,
+          13.25
+        ],
+        [
+          9.05,
+          13.25
+        ],
+        [
+          9.05,
+          15.98
+        ],
+        [
+          6.86,
+          15.98
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "bakery_north",
+      "name": "Padaria Norte",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          11.69,
+          -4.03
+        ],
+        [
+          14.49,
+          -4.03
+        ],
+        [
+          14.49,
+          -1.58
+        ],
+        [
+          11.69,
+          -1.58
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "hip",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "cottage_east_1",
+      "name": "Casa Horta",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          11.95,
+          -1.3
+        ],
+        [
+          14.95,
+          -1.3
+        ],
+        [
+          14.95,
+          0.86
+        ],
+        [
+          11.95,
+          0.86
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "tavern_manor_2f",
+      "name": "Casarão Forja & Taverna (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          11.44,
+          1.15
+        ],
+        [
+          15.66,
+          1.15
+        ],
+        [
+          15.66,
+          4.03
+        ],
+        [
+          11.44,
+          4.03
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.28,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 3,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "smithy_wing",
+      "name": "Oficina Ferreiro",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          12.61,
+          4.03
+        ],
+        [
+          15.5,
+          4.03
+        ],
+        [
+          15.5,
+          6.62
+        ],
+        [
+          12.61,
+          6.62
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "row_house_1",
+      "name": "Casa da Ferraria",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          13.83,
+          8.06
+        ],
+        [
+          16.88,
+          8.06
+        ],
+        [
+          16.88,
+          10.51
+        ],
+        [
+          13.83,
+          10.51
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "stable_2f",
+      "name": "Estábulo do Curral (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          16.17,
+          10.66
+        ],
+        [
+          19.22,
+          10.66
+        ],
+        [
+          19.22,
+          13.82
+        ],
+        [
+          16.17,
+          13.82
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.22,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "hip",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "cottage_east_2",
+      "name": "Casa Travessa",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          14.44,
+          11.09
+        ],
+        [
+          16.67,
+          11.09
+        ],
+        [
+          16.67,
+          13.82
+        ],
+        [
+          14.44,
+          13.82
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "manor_south_2f",
+      "name": "Casa Sul da Vila (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          13.22,
+          15.41
+        ],
+        [
+          16.47,
+          15.41
+        ],
+        [
+          16.47,
+          18.29
+        ],
+        [
+          13.22,
+          18.29
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.24,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": true,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "cliff_ruin_nw",
+      "name": "Muralha Penhasco NW",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          -14.3,
+          10.04
+        ],
+        [
+          -11.25,
+          8.24
+        ],
+        [
+          -11.63,
+          7.6
+        ],
+        [
+          -14.68,
+          9.4
+        ]
+      ],
+      "baseElevation": 0.78,
+      "floors": 1,
+      "floorHeight": 1.8,
+      "wallStyle": "buttress",
+      "includeFloorSlabs": false,
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "parapet",
+      "roofPitchDeg": 20,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "roofMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "cliff_ruin_sw",
+      "name": "Muralha Penhasco SW",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          -16.02,
+          12.87
+        ],
+        [
+          -12.97,
+          15.75
+        ],
+        [
+          -12.45,
+          15.21
+        ],
+        [
+          -15.5,
+          12.33
+        ]
+      ],
+      "baseElevation": 0.78,
+      "floors": 1,
+      "floorHeight": 1.7,
+      "wallStyle": "buttress",
+      "includeFloorSlabs": false,
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "parapet",
+      "roofPitchDeg": 20,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "roofMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "cliff_ruin_ne",
+      "name": "Muralha Penhasco NE",
+      "semanticTag": "wall",
+      "footprint": [
+        [
+          -8.46,
+          9.17
+        ],
+        [
+          -6.02,
+          13.85
+        ],
+        [
+          -5.36,
+          13.51
+        ],
+        [
+          -7.8,
+          8.83
+        ]
+      ],
+      "baseElevation": 0.78,
+      "floors": 1,
+      "floorHeight": 1.7,
+      "wallStyle": "buttress",
+      "includeFloorSlabs": false,
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "roofType": "parapet",
+      "roofPitchDeg": 20,
+      "roofOverhang": 0,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "roofMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "cliff_round_tower",
+      "name": "Torre em Ruína do Penhasco",
+      "semanticTag": "tower",
+      "footprint": [
+        [
+          -7.42,
+          14.98
+        ],
+        [
+          -7.67,
+          14.2
+        ],
+        [
+          -8.33,
+          13.72
+        ],
+        [
+          -9.15,
+          13.72
+        ],
+        [
+          -9.81,
+          14.2
+        ],
+        [
+          -10.06,
+          14.98
+        ],
+        [
+          -9.81,
+          15.76
+        ],
+        [
+          -9.15,
+          16.24
+        ],
+        [
+          -8.33,
+          16.24
+        ],
+        [
+          -7.67,
+          15.76
+        ]
+      ],
+      "baseElevation": 0.98,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "buttress",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "parapet",
+      "roofPitchDeg": 44,
+      "roofOverhang": 0.25,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "roofMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "rapids_bridge",
+      "name": "Passarela sobre Corredeiras",
+      "semanticTag": "bridge",
+      "footprint": [
+        [
+          -18.71,
+          19.44
+        ],
+        [
+          -16.67,
+          19.44
+        ],
+        [
+          -16.67,
+          21.46
+        ],
+        [
+          -18.71,
+          21.46
+        ]
+      ],
+      "baseElevation": 0.36,
+      "floors": 1,
+      "floorHeight": 0.55,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": false,
+      "windowsPerWall": 0,
+      "hasDoor": false,
+      "hasChimney": false,
+      "roofType": "flat",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "roofMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "river_warehouse",
+      "name": "Armazém da Praia",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          3.46,
+          21.6
+        ],
+        [
+          7.02,
+          21.6
+        ],
+        [
+          7.02,
+          23.76
+        ],
+        [
+          3.46,
+          23.76
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "ferry_boathouse",
+      "name": "Casa da Balsa (2 Andares)",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          12.45,
+          23.9
+        ],
+        [
+          16.27,
+          23.9
+        ],
+        [
+          16.27,
+          27
+        ],
+        [
+          12.45,
+          27
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 2,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0.22,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 2,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    },
+    {
+      "id": "south_bank_hut",
+      "name": "Cabana Margem Sul",
+      "semanticTag": "building",
+      "footprint": [
+        [
+          -12.4,
+          30.53
+        ],
+        [
+          -10.37,
+          30.53
+        ],
+        [
+          -10.37,
+          33.55
+        ],
+        [
+          -12.4,
+          33.55
+        ]
+      ],
+      "baseElevation": 0.9,
+      "floors": 1,
+      "floorHeight": 2.3,
+      "wallStyle": "timber_frame",
+      "upperFloorOverhang": 0,
+      "includeFloorSlabs": true,
+      "windowsPerWall": 1,
+      "hasDoor": true,
+      "hasChimney": false,
+      "roofType": "gable",
+      "roofPitchDeg": 38,
+      "roofOverhang": 0.35,
+      "hideRoof": false,
+      "textureMode": "procedural",
+      "fallbackMaterial": "timber_plaster",
+      "roofMaterial": "roof_teal",
+      "visible": true
+    }
+  ],
+  "props": [
+    {
+      "id": "village_well",
+      "name": "Poço da Praça",
+      "generator": "well",
+      "position": [
+        9.76,
+        0.62,
+        9.5
+      ],
+      "rotationYDeg": 15,
+      "scale": 1.15,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "cliff_boulder",
+      "name": "Grande Rocha Oeste",
+      "generator": "rock",
+      "position": [
+        -12.91,
+        0.65,
+        -1.08
+      ],
+      "rotationYDeg": 25,
+      "scale": 3.1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "sawmill_crates",
+      "name": "Madeira Serraria",
+      "generator": "crate",
+      "position": [
+        18.56,
+        0.62,
+        -18.72
+      ],
+      "rotationYDeg": 40,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "beach_boat_1",
+      "name": "Barco Praia A",
+      "generator": "boat",
+      "position": [
+        7.52,
+        0.28,
+        27.36
+      ],
+      "rotationYDeg": 175,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "beach_boat_2",
+      "name": "Barco Praia B",
+      "generator": "boat",
+      "position": [
+        8.74,
+        0.28,
+        27.36
+      ],
+      "rotationYDeg": 185,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "beach_boat_3",
+      "name": "Barco Porto C",
+      "generator": "boat",
+      "position": [
+        12.3,
+        0.3,
+        26.5
+      ],
+      "rotationYDeg": 215,
+      "scale": 1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "inn_barrel_1",
+      "name": "Barris Estalagem",
+      "generator": "barrel",
+      "position": [
+        8.64,
+        0.62,
+        9
+      ],
+      "rotationYDeg": 20,
+      "scale": 1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "smithy_brazier",
+      "name": "Forja Braseiro",
+      "generator": "brazier",
+      "position": [
+        16.17,
+        0.62,
+        3.24
+      ],
+      "rotationYDeg": 0,
+      "scale": 1,
+      "textureMode": "procedural",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "tree_cross_w",
+      "name": "Árvore Estrada W",
+      "generator": "deciduous_tree",
+      "position": [
+        7.12,
+        0.65,
+        -9.72
+      ],
+      "rotationYDeg": 20,
+      "scale": 1.75,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_cross_e",
+      "name": "Árvore Estrada E",
+      "generator": "deciduous_tree",
+      "position": [
+        10.93,
+        0.65,
+        -10.08
+      ],
+      "rotationYDeg": 85,
+      "scale": 1.65,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_mid_a",
+      "name": "Árvore Clareira A",
+      "generator": "deciduous_tree",
+      "position": [
+        -1.02,
+        0.65,
+        -6.84
+      ],
+      "rotationYDeg": 140,
+      "scale": 1.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_mid_b",
+      "name": "Árvore Clareira B",
+      "generator": "deciduous_tree",
+      "position": [
+        1.78,
+        0.65,
+        -7.2
+      ],
+      "rotationYDeg": 210,
+      "scale": 1.65,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_cliff",
+      "name": "Árvore Penhasco",
+      "generator": "deciduous_tree",
+      "position": [
+        -5.19,
+        0.75,
+        6.48
+      ],
+      "rotationYDeg": 50,
+      "scale": 1.7,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_1",
+      "name": "Pomar 1",
+      "generator": "deciduous_tree",
+      "position": [
+        16.78,
+        0.65,
+        20.16
+      ],
+      "rotationYDeg": 15,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_2",
+      "name": "Pomar 2",
+      "generator": "deciduous_tree",
+      "position": [
+        19.57,
+        0.65,
+        19.44
+      ],
+      "rotationYDeg": 75,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_3",
+      "name": "Pomar 3",
+      "generator": "deciduous_tree",
+      "position": [
+        22.37,
+        0.65,
+        18.72
+      ],
+      "rotationYDeg": 130,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_4",
+      "name": "Pomar 4",
+      "generator": "deciduous_tree",
+      "position": [
+        17.28,
+        0.65,
+        23.4
+      ],
+      "rotationYDeg": 195,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_5",
+      "name": "Pomar 5",
+      "generator": "deciduous_tree",
+      "position": [
+        20.33,
+        0.65,
+        22.68
+      ],
+      "rotationYDeg": 250,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_6",
+      "name": "Pomar 6",
+      "generator": "deciduous_tree",
+      "position": [
+        23.13,
+        0.65,
+        21.96
+      ],
+      "rotationYDeg": 305,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_7",
+      "name": "Pomar 7",
+      "generator": "deciduous_tree",
+      "position": [
+        18.05,
+        0.65,
+        27
+      ],
+      "rotationYDeg": 45,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "orchard_8",
+      "name": "Pomar 8",
+      "generator": "deciduous_tree",
+      "position": [
+        21.35,
+        0.65,
+        26.28
+      ],
+      "rotationYDeg": 115,
+      "scale": 1.3,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    }
+  ],
+  "lighting": {
+    "sunAzimuthDeg": 320,
+    "sunElevationDeg": 52,
+    "sunIntensity": 1.9,
+    "ambientIntensity": 0.72,
+    "torchEnabled": true,
+    "torchIntensity": 2.4,
+    "torchColor": "#ff9d42"
+  },
+  "worldGrammar": {
+    "scale": "small",
+    "seed": 2026,
+    "randomness": 0.48,
+    "treeDensity": 0.95,
+    "minTreeSpacing": 3.2,
+    "poiChance": 0.55,
+    "meanderStrength": 0.55,
+    "enableBridges": true,
+    "enableRoadContinuation": true,
+    "enableWaterContinuation": true,
+    "enableForestScatter": true,
+    "enableArchitecturalPOIs": true
+  }
+}

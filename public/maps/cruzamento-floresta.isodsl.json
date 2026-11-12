@@ -1,0 +1,571 @@
+{
+  "schemaVersion": "1.0",
+  "meta": {
+    "name": "Cruzamento do Rio na Floresta",
+    "sourceLabel": "cruzamento-floresta.jpg",
+    "aspectRatio": 0.6337890625,
+    "createdAt": "2026-11-11T18:59:30.124Z"
+  },
+  "projection": {
+    "label": "Top-Down Battlemap (89.5° / 0°)",
+    "preset": "top_down",
+    "type": "orthographic",
+    "pitchDeg": 89.5,
+    "yawDeg": 0,
+    "fovDeg": 35,
+    "orthoScale": 32,
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "terrain": {
+    "width": 20.281,
+    "depth": 32,
+    "subdivisions": 120,
+    "displacementScale": 1.25,
+    "normalStrength": 2.2,
+    "detailBlend": 0.58,
+    "smoothRadius": 2,
+    "invertHeight": false,
+    "heightMode": "semantic_outdoor",
+    "textureMode": "hybrid",
+    "fallbackMaterial": "moss_earth",
+    "waterEnabled": true,
+    "waterElevation": 0.34
+  },
+  "structures": [],
+  "props": [
+    {
+      "id": "crossroads_signpost",
+      "name": "Placa da Encruzilhada (3 Vias)",
+      "generator": "signpost",
+      "position": [
+        1.01,
+        0.58,
+        0.8
+      ],
+      "rotationYDeg": 20,
+      "scale": 1.15,
+      "textureMode": "procedural",
+      "fallbackMaterial": "wood_plank",
+      "visible": true
+    },
+    {
+      "id": "tree_n_01",
+      "name": "Árvore Norte NW",
+      "generator": "deciduous_tree",
+      "position": [
+        -8.11,
+        0.72,
+        -14.72
+      ],
+      "rotationYDeg": 15,
+      "scale": 1.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_n_02",
+      "name": "Árvore Norte Cinza",
+      "generator": "deciduous_tree",
+      "position": [
+        -4.46,
+        0.72,
+        -14.72
+      ],
+      "rotationYDeg": 65,
+      "scale": 1.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_n_03",
+      "name": "Árvore Norte Centro",
+      "generator": "deciduous_tree",
+      "position": [
+        -1.01,
+        0.72,
+        -15.04
+      ],
+      "rotationYDeg": 110,
+      "scale": 1.55,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_n_04",
+      "name": "Árvore Norte Clara",
+      "generator": "deciduous_tree",
+      "position": [
+        1.62,
+        0.72,
+        -15.04
+      ],
+      "rotationYDeg": 200,
+      "scale": 1.75,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_n_05",
+      "name": "Árvore Norte NE",
+      "generator": "deciduous_tree",
+      "position": [
+        5.68,
+        0.72,
+        -15.04
+      ],
+      "rotationYDeg": 290,
+      "scale": 1.65,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_n_06",
+      "name": "Árvore Canto NE",
+      "generator": "deciduous_tree",
+      "position": [
+        9.13,
+        0.72,
+        -14.4
+      ],
+      "rotationYDeg": 40,
+      "scale": 1.75,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_e_01",
+      "name": "Árvore Leste Alta",
+      "generator": "deciduous_tree",
+      "position": [
+        9.53,
+        0.72,
+        -8.32
+      ],
+      "rotationYDeg": 85,
+      "scale": 1.45,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_e_02",
+      "name": "Árvore Leste Média",
+      "generator": "deciduous_tree",
+      "position": [
+        8.72,
+        0.72,
+        -5.44
+      ],
+      "rotationYDeg": 145,
+      "scale": 1.65,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_e_03",
+      "name": "Árvore Leste Grande",
+      "generator": "deciduous_tree",
+      "position": [
+        8.92,
+        0.72,
+        0.64
+      ],
+      "rotationYDeg": 230,
+      "scale": 1.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_w_01",
+      "name": "Árvore Oeste Escura",
+      "generator": "deciduous_tree",
+      "position": [
+        -8.72,
+        0.72,
+        -2.88
+      ],
+      "rotationYDeg": 50,
+      "scale": 1.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_w_02",
+      "name": "Árvore Oeste Rio",
+      "generator": "deciduous_tree",
+      "position": [
+        -9.73,
+        0.7,
+        9.6
+      ],
+      "rotationYDeg": 120,
+      "scale": 1.45,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_hero_sw",
+      "name": "Grande Árvore da Sombra",
+      "generator": "deciduous_tree",
+      "position": [
+        -1.83,
+        0.72,
+        4.48
+      ],
+      "rotationYDeg": 35,
+      "scale": 2.35,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_sw_02",
+      "name": "Árvore Secundária SW",
+      "generator": "deciduous_tree",
+      "position": [
+        -4.46,
+        0.72,
+        7.36
+      ],
+      "rotationYDeg": 175,
+      "scale": 1.65,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_s_01",
+      "name": "Árvore Sul Esquerda",
+      "generator": "deciduous_tree",
+      "position": [
+        -6.69,
+        0.68,
+        15.04
+      ],
+      "rotationYDeg": 95,
+      "scale": 1.45,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "tree_s_02",
+      "name": "Árvore Sul Brilhante",
+      "generator": "deciduous_tree",
+      "position": [
+        -2.84,
+        0.7,
+        14.08
+      ],
+      "rotationYDeg": 210,
+      "scale": 2.05,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_mid_01",
+      "name": "Moita Clareira A",
+      "generator": "bush",
+      "position": [
+        -1.42,
+        0.65,
+        -7.04
+      ],
+      "rotationYDeg": 20,
+      "scale": 1.15,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_mid_02",
+      "name": "Moita Clareira B",
+      "generator": "bush",
+      "position": [
+        -0.2,
+        0.65,
+        -6.72
+      ],
+      "rotationYDeg": 110,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_mid_03",
+      "name": "Moita Clareira C",
+      "generator": "bush",
+      "position": [
+        -1.62,
+        0.65,
+        -6.08
+      ],
+      "rotationYDeg": 240,
+      "scale": 0.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_w_01",
+      "name": "Arbusto Estrada Oeste A",
+      "generator": "bush",
+      "position": [
+        -7.71,
+        0.68,
+        -0.64
+      ],
+      "rotationYDeg": 35,
+      "scale": 1.05,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_w_02",
+      "name": "Arbusto Estrada Oeste B",
+      "generator": "bush",
+      "position": [
+        -6.49,
+        0.68,
+        0.64
+      ],
+      "rotationYDeg": 150,
+      "scale": 0.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_e_01",
+      "name": "Arbusto Leste A",
+      "generator": "bush",
+      "position": [
+        6.69,
+        0.68,
+        2.24
+      ],
+      "rotationYDeg": 70,
+      "scale": 1.05,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_e_02",
+      "name": "Arbusto Leste B",
+      "generator": "bush",
+      "position": [
+        5.07,
+        0.68,
+        3.52
+      ],
+      "rotationYDeg": 210,
+      "scale": 0.85,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_sw_01",
+      "name": "Arbusto Margem SW A",
+      "generator": "bush",
+      "position": [
+        -6.49,
+        0.66,
+        9.28
+      ],
+      "rotationYDeg": 45,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_sw_02",
+      "name": "Arbusto Margem SW B",
+      "generator": "bush",
+      "position": [
+        -8.11,
+        0.66,
+        10.24
+      ],
+      "rotationYDeg": 120,
+      "scale": 0.8,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_s_01",
+      "name": "Arbusto Sul A",
+      "generator": "bush",
+      "position": [
+        0.81,
+        0.65,
+        12.8
+      ],
+      "rotationYDeg": 30,
+      "scale": 1.05,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_s_02",
+      "name": "Arbusto Sul B",
+      "generator": "bush",
+      "position": [
+        2.23,
+        0.65,
+        14.4
+      ],
+      "rotationYDeg": 140,
+      "scale": 0.95,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "bush_s_03",
+      "name": "Arbusto Sul C",
+      "generator": "bush",
+      "position": [
+        4.66,
+        0.65,
+        15.36
+      ],
+      "rotationYDeg": 260,
+      "scale": 0.9,
+      "textureMode": "procedural",
+      "fallbackMaterial": "moss_earth",
+      "visible": true
+    },
+    {
+      "id": "rock_river_01",
+      "name": "Pedra Rio SW",
+      "generator": "rock",
+      "position": [
+        -7.3,
+        0.22,
+        13.76
+      ],
+      "rotationYDeg": 25,
+      "scale": 0.7,
+      "textureMode": "hybrid",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "rock_river_02",
+      "name": "Pedra Passo A",
+      "generator": "rock",
+      "position": [
+        -3.85,
+        0.22,
+        12.8
+      ],
+      "rotationYDeg": 110,
+      "scale": 0.65,
+      "textureMode": "hybrid",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "rock_river_03",
+      "name": "Pedra Passo B",
+      "generator": "rock",
+      "position": [
+        -1.83,
+        0.22,
+        12.16
+      ],
+      "rotationYDeg": 200,
+      "scale": 0.6,
+      "textureMode": "hybrid",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "rock_river_04",
+      "name": "Pedra Confluência A",
+      "generator": "rock",
+      "position": [
+        6.9,
+        0.22,
+        6.72
+      ],
+      "rotationYDeg": 45,
+      "scale": 0.7,
+      "textureMode": "hybrid",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "rock_river_05",
+      "name": "Pedra Confluência B",
+      "generator": "rock",
+      "position": [
+        9.33,
+        0.22,
+        8.32
+      ],
+      "rotationYDeg": 160,
+      "scale": 0.65,
+      "textureMode": "hybrid",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    },
+    {
+      "id": "rock_west_01",
+      "name": "Rocha Trilha Oeste",
+      "generator": "rock",
+      "position": [
+        -9.53,
+        0.58,
+        -6.4
+      ],
+      "rotationYDeg": 80,
+      "scale": 0.75,
+      "textureMode": "hybrid",
+      "fallbackMaterial": "stone_brick",
+      "visible": true
+    }
+  ],
+  "lighting": {
+    "sunAzimuthDeg": 315,
+    "sunElevationDeg": 52,
+    "sunIntensity": 1.85,
+    "ambientIntensity": 0.72,
+    "torchEnabled": true,
+    "torchIntensity": 2.2,
+    "torchColor": "#ff9d42"
+  },
+  "worldGrammar": {
+    "scale": "small",
+    "seed": 1337,
+    "randomness": 0.45,
+    "treeDensity": 1,
+    "minTreeSpacing": 2.8,
+    "poiChance": 0.45,
+    "meanderStrength": 0.55,
+    "enableBridges": true,
+    "enableRoadContinuation": true,
+    "enableWaterContinuation": true,
+    "enableForestScatter": true,
+    "enableArchitecturalPOIs": true
+  }
+}

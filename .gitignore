@@ -1,0 +1,24 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# OS/editor metadata
+.DS_Store
+._*
+.vscode/
+.idea/
+
+# Local archives and generated artifacts
+*.zip
+*.tar
+*.tar.gz
+*.log
