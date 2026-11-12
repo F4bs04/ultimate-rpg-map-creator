@@ -1047,10 +1047,20 @@ export const Viewport3D: React.FC = () => {
       ref.torchLight.position.set(0, 3.5, 0);
     }
 
-    // Plano de água opcional estendido até o horizonte de mundo aberto
+    const useProceduralWorldSurfaces =
+      !showProjectedImage || visibleTerrainMode === 'procedural';
+
+    // Plano de água global é apenas fallback. Quando já existem rios
+    // reconstruídos no âncora ou nos chunks, ele criava um retângulo azul
+    // gigante e denunciava a divisão entre regiões.
     const hasReconstructedWater =
-      visibleTerrainMode === 'procedural' &&
-      Boolean(sceneData.terrainFeatures?.some((feature) => feature.kind === 'water'));
+      useProceduralWorldSurfaces &&
+      (Boolean(sceneData.terrainFeatures?.some((feature) => feature.kind === 'water')) ||
+        Boolean(
+          worldExpansion?.chunks.some((chunk) =>
+            chunk.segments.some((segment) => segment.kind === 'water')
+          )
+        ));
     if (sceneData.terrain.waterEnabled && !hasReconstructedWater) {
       const waterGeom = new THREE.PlaneGeometry(
         worldWidthSpan * 2.8,
@@ -1072,7 +1082,7 @@ export const Viewport3D: React.FC = () => {
 
     // Faixas vetoriais de terreno reconstruído (rios/estradas) aparecem somente no modo
     // puramente procedural; no modo híbrido a imagem pintada já exibe estradas e margens nativas.
-    for (const feature of effectiveTerrainMode === 'procedural' ? sceneData.terrainFeatures ?? [] : []) {
+    for (const feature of useProceduralWorldSurfaces ? sceneData.terrainFeatures ?? [] : []) {
       const featureGeom = buildTerrainFeatureGeometry(feature);
       if (!featureGeom) continue;
       const preset =
@@ -1103,7 +1113,7 @@ export const Viewport3D: React.FC = () => {
 
     // Faixas vetoriais de portais WFC só são necessárias no modo puramente procedural;
     // no modo híbrido a própria textura/relevo do chunk + plano de água desenham estradas e rios sem costura.
-    if (effectiveTerrainMode === 'procedural') {
+    if (useProceduralWorldSurfaces) {
       for (const chunk of worldExpansion?.chunks ?? []) {
         for (const segment of chunk.segments) {
           const segmentFeature = {
@@ -1139,7 +1149,7 @@ export const Viewport3D: React.FC = () => {
     if (worldExpansion && worldExpansion.gridRadius > 0) {
       for (const chunk of worldExpansion.chunks) {
         if (chunk.isAnchor) continue;
-        const cGeom = new THREE.PlaneGeometry(
+        let cGeom: THREE.BufferGeometry = new THREE.PlaneGeometry(
           chunk.width,
           chunk.depth,
           chunk.subdivisions,
@@ -1160,7 +1170,30 @@ export const Viewport3D: React.FC = () => {
         }
 
         let cMat: THREE.MeshStandardMaterial;
-        if (chunk.albedoRgba && chunk.heightWidth && chunk.heightHeight) {
+        if (useProceduralWorldSurfaces) {
+          // Usa a mesma textura procedural e a mesma escala UV do terreno
+          // âncora. A versão anterior esticava um DataTexture por chunk,
+          // causando manchas claras/escuras e costuras visíveis sem a arte.
+          const worldMatrix = new THREE.Matrix4().makeTranslation(
+            chunk.centerX,
+            0,
+            chunk.centerZ
+          );
+          const proceduralGeom = bakeProjectedUVs(
+            cGeom,
+            worldMatrix,
+            projector,
+            { textureMode: 'procedural', proceduralTileScale: 0.25 }
+          );
+          cGeom.dispose();
+          cGeom = proceduralGeom;
+          cMat = makeFallbackMaterial(
+            sceneData.terrain.fallbackMaterial,
+            false,
+            worldKit
+          );
+          cMat.roughness = Math.min(0.9, cMat.roughness + 0.02);
+        } else if (chunk.albedoRgba && chunk.heightWidth && chunk.heightHeight) {
           const albedoTex = new THREE.DataTexture(
             chunk.albedoRgba,
             chunk.heightWidth,
