@@ -204,6 +204,7 @@ export const Viewport3D: React.FC = () => {
   const explorerNearbyDoor = useSceneStore((s) => s.explorerNearbyDoor);
   const showGrid = useSceneStore((s) => s.showGrid);
   const showReferenceOverlay = useSceneStore((s) => s.showReferenceOverlay);
+  const showProjectedImage = useSceneStore((s) => s.showProjectedImage);
   const overlayOpacity = useSceneStore((s) => s.overlayOpacity);
   const snapRequestCount = useSceneStore((s) => s.snapRequestCount);
   const exportTrigger = useSceneStore((s) => s.exportTrigger);
@@ -929,6 +930,13 @@ export const Viewport3D: React.FC = () => {
       sceneData,
       sceneData.terrain.textureMode
     );
+    const visibleTerrainMode = showProjectedImage
+      ? effectiveTerrainMode
+      : 'procedural';
+    const resolveVisibleTextureMode = (requested: TextureMode): TextureMode =>
+      showProjectedImage
+        ? getEffectiveTextureMode(sceneData, requested)
+        : 'procedural';
 
     // 1. Terreno com Displacement assado na malha + Normal Map (alinha 1:1 com chunks vizinhos)
     const terrainRaw = buildTerrainBaseGeometry(sceneData.terrain);
@@ -940,14 +948,14 @@ export const Viewport3D: React.FC = () => {
       );
     }
     const terrainGeom = bakeProjectedUVs(terrainRaw, identity, projector, {
-      textureMode: effectiveTerrainMode,
+      textureMode: visibleTerrainMode,
       proceduralTileScale: 0.25,
     });
     terrainRaw.dispose();
 
     const terrainProjectedMat = new THREE.MeshStandardMaterial({
-      map: ref.sourceTexture,
-      color: ref.sourceTexture ? '#ffffff' : '#3a4a35',
+      map: showProjectedImage ? ref.sourceTexture : null,
+      color: showProjectedImage && ref.sourceTexture ? '#ffffff' : '#3a4a35',
       normalMap: ref.normalTexture,
       normalScale: new THREE.Vector2(
         sceneData.terrain.normalStrength * 0.45,
@@ -969,7 +977,7 @@ export const Viewport3D: React.FC = () => {
     const terrainMesh = new THREE.Mesh(
       terrainGeom,
       selectMeshMaterial(
-        effectiveTerrainMode,
+        visibleTerrainMode,
         terrainProjectedMat,
         terrainFallbackMat
       )
@@ -1041,7 +1049,7 @@ export const Viewport3D: React.FC = () => {
 
     // Plano de água opcional estendido até o horizonte de mundo aberto
     const hasReconstructedWater =
-      effectiveTerrainMode === 'procedural' &&
+      visibleTerrainMode === 'procedural' &&
       Boolean(sceneData.terrainFeatures?.some((feature) => feature.kind === 'water'));
     if (sceneData.terrain.waterEnabled && !hasReconstructedWater) {
       const waterGeom = new THREE.PlaneGeometry(
@@ -1163,6 +1171,7 @@ export const Viewport3D: React.FC = () => {
           albedoTex.colorSpace = THREE.SRGBColorSpace;
           albedoTex.magFilter = THREE.LinearFilter;
           albedoTex.minFilter = THREE.LinearMipmapLinearFilter;
+          albedoTex.anisotropy = ref.renderer.capabilities.getMaxAnisotropy();
           albedoTex.generateMipmaps = true;
           albedoTex.needsUpdate = true;
 
@@ -1176,15 +1185,17 @@ export const Viewport3D: React.FC = () => {
             );
             normalTex.flipY = true;
             normalTex.magFilter = THREE.LinearFilter;
-            normalTex.minFilter = THREE.LinearFilter;
+            normalTex.minFilter = THREE.LinearMipmapLinearFilter;
+            normalTex.anisotropy = ref.renderer.capabilities.getMaxAnisotropy();
+            normalTex.generateMipmaps = true;
             normalTex.needsUpdate = true;
           }
 
           cMat = new THREE.MeshStandardMaterial({
             map: albedoTex,
             normalMap: normalTex,
-            normalScale: new THREE.Vector2(1.05, 1.05),
-            roughness: 0.9,
+            normalScale: new THREE.Vector2(1.28, 1.28),
+            roughness: 0.86,
             metalness: 0.03,
           });
           cMat.userData.ownsTextures = true;
@@ -1229,7 +1240,7 @@ export const Viewport3D: React.FC = () => {
       const clippableMats: THREE.Material[] = [];
 
       const wallTexMode = resolveSurfaceTextureMode(
-        getEffectiveTextureMode(sceneData, st.textureMode),
+        resolveVisibleTextureMode(st.textureMode),
         'wall',
         sceneData.projection.pitchDeg,
         st.semanticTag
@@ -1305,14 +1316,21 @@ export const Viewport3D: React.FC = () => {
       }
 
       if (archBundle.projectedGroundFloorGeom) {
+        const groundFloorMode: TextureMode = showProjectedImage
+          ? 'projected'
+          : 'procedural';
         const projFloorGeom = bakeProjectedUVs(
           archBundle.projectedGroundFloorGeom,
           identity,
           projector,
-          { textureMode: 'projected' }
+          { textureMode: groundFloorMode }
         );
         archBundle.projectedGroundFloorGeom.dispose();
-        const projFloorMat = makeProjMat(true);
+        const projFloorMat =
+          groundFloorMode === 'projected'
+            ? makeProjMat(true)
+            : makeFallbackMaterial('wood_plank', isSelected, worldKit);
+        projFloorMat.side = THREE.DoubleSide;
         clippableMats.push(projFloorMat);
         const projFloorMesh = new THREE.Mesh(projFloorGeom, projFloorMat);
         projFloorMesh.receiveShadow = true;
@@ -1390,7 +1408,7 @@ export const Viewport3D: React.FC = () => {
       const roofRaw = buildStructureRoofGeometry(st);
       if (roofRaw) {
         const roofTexMode = resolveSurfaceTextureMode(
-          getEffectiveTextureMode(sceneData, st.textureMode),
+          resolveVisibleTextureMode(st.textureMode),
           'roof',
           sceneData.projection.pitchDeg,
           st.roofType
@@ -1461,7 +1479,7 @@ export const Viewport3D: React.FC = () => {
         propMat = sMat;
       } else {
         const propTexMode = resolveSurfaceTextureMode(
-          getEffectiveTextureMode(sceneData, prop.textureMode),
+          resolveVisibleTextureMode(prop.textureMode),
           'prop',
           sceneData.projection.pitchDeg,
           prop.generator
@@ -1584,6 +1602,7 @@ export const Viewport3D: React.FC = () => {
     heightMapDataUrl,
     normalMapDataUrl,
     sourceImageUrl,
+    showProjectedImage,
     texVersion,
   ]);
 
@@ -1744,10 +1763,32 @@ export const Viewport3D: React.FC = () => {
           explorerStateRef.current.keys.add(key);
         } else if (key === 'e' || key === 'pageup') {
           const st = useSceneStore.getState();
-          st.setExplorerFloor(st.explorerFloor + 1);
+          const structures = st.worldExpansion
+            ? [...st.scene.structures, ...st.worldExpansion.worldStructures]
+            : st.scene.structures;
+          const entered = findEnteredInteriorCluster(
+            explorerStateRef.current.pos.x,
+            explorerStateRef.current.pos.z,
+            structures,
+            0.02
+          );
+          if (entered.primary && (entered.primary.hasStairs ?? entered.primary.floors >= 2)) {
+            st.setExplorerFloor(st.explorerFloor + 1);
+          }
         } else if (key === 'q' || key === 'pagedown') {
           const st = useSceneStore.getState();
-          st.setExplorerFloor(st.explorerFloor - 1);
+          const structures = st.worldExpansion
+            ? [...st.scene.structures, ...st.worldExpansion.worldStructures]
+            : st.scene.structures;
+          const entered = findEnteredInteriorCluster(
+            explorerStateRef.current.pos.x,
+            explorerStateRef.current.pos.z,
+            structures,
+            0.02
+          );
+          if (entered.primary && (entered.primary.hasStairs ?? entered.primary.floors >= 2)) {
+            st.setExplorerFloor(st.explorerFloor - 1);
+          }
         } else if (key === 'f') {
           const st = useSceneStore.getState();
           if (st.explorerNearbyDoor) {

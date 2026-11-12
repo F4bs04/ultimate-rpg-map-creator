@@ -94,6 +94,7 @@ interface SceneStore {
   doorToggleRequest: { id: string; nonce: number } | null;
   showGrid: boolean;
   showReferenceOverlay: boolean;
+  showProjectedImage: boolean;
   overlayOpacity: number;
   stats: SceneStats;
   snapRequestCount: number;
@@ -160,6 +161,7 @@ interface SceneStore {
   requestToggleDoor: (id: string) => void;
   setShowGrid: (v: boolean) => void;
   setShowReferenceOverlay: (v: boolean) => void;
+  setShowProjectedImage: (v: boolean) => void;
   setOverlayOpacity: (v: number) => void;
   setStats: (stats: SceneStats) => void;
   setIncludeColliders: (v: boolean) => void;
@@ -267,6 +269,7 @@ export const useSceneStore = create<SceneStore>((set, get) => ({
   doorToggleRequest: null,
   showGrid: true,
   showReferenceOverlay: false,
+  showProjectedImage: true,
   overlayOpacity: 0.35,
   stats: { triangles: 0, vertices: 0, meshCount: 0 },
   snapRequestCount: 0,
@@ -873,6 +876,7 @@ export const useSceneStore = create<SceneStore>((set, get) => ({
     })),
   setShowGrid: (showGrid) => set({ showGrid }),
   setShowReferenceOverlay: (showReferenceOverlay) => set({ showReferenceOverlay }),
+  setShowProjectedImage: (showProjectedImage) => set({ showProjectedImage }),
   setOverlayOpacity: (overlayOpacity) => set({ overlayOpacity }),
   setStats: (stats) => set({ stats }),
   setIncludeColliders: (includeColliders) => set({ includeColliders }),

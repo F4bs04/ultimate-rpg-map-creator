@@ -693,7 +693,10 @@ export function buildMultiScaleWorld(
   for (const chunk of chunks) {
     if (chunk.isAnchor) continue;
     const distRing = Math.max(Math.abs(chunk.gx), Math.abs(chunk.gz));
-    const texRes = distRing >= 3 ? 60 : chunk.isOuterLOD ? 88 : 192;
+    // A expansão não deve parecer uma miniatura borrada da âncora. Os chunks
+    // próximos recebem mais texels; os anéis distantes continuam baratos, mas
+    // preservam detalhe suficiente para a câmera Orbit e para o GLB.
+    const texRes = distRing >= 3 ? 128 : chunk.isOuterLOD ? 192 : 256;
     const rgba = new Uint8ClampedArray(texRes * texRes * 4);
     const heightField = new Float32Array(texRes * texRes);
 
@@ -727,6 +730,18 @@ export function buildMultiScaleWorld(
           r = r * (1 - waterBlend) + waterSample[0] * waterBlend;
           g = g * (1 - waterBlend) + waterSample[1] * waterBlend;
           b = b * (1 - waterBlend) + waterSample[2] * waterBlend;
+        }
+
+        // Microvariação procedural por coordenada: evita que o swatch absorvido
+        // seja exibido como um bitmap liso quando ampliamos os chunks externos.
+        if (waterBlend < 0.7) {
+          const grain =
+            (hash2D(Math.floor(wx * 1.7), Math.floor(wz * 1.7), grammar.seed + 29) -
+              0.5) *
+            18;
+          r += grain;
+          g += grain * 0.86;
+          b += grain * 0.58;
         }
 
         // Suavização contínua na borda do chunk âncora (0,0): converge 100% para a cor e

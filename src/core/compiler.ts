@@ -399,20 +399,35 @@ export function buildStructureArchitectureBundle(
   if (hasPlayableInterior && includeSlabs) {
     const innerBounds = getFootprintBounds(basePts);
     const minSpan = Math.min(innerBounds.width, innerBounds.depth);
-    if (minSpan >= 1.85) {
-      // Escada de madeira interna conectando térreo -> 2º andar + mobiliário do piso superior
-      if (floors >= 2 && minSpan >= 2.2) {
-        const stairX = innerBounds.minX + innerBounds.width * 0.24;
-        const stairZ = innerBounds.minZ + innerBounds.depth * 0.28;
-        const steps = 5;
+    const hasStairs = structure.hasStairs ?? floors >= 2;
+
+    // Toda casa habitável com 2+ pisos recebe uma escada compacta. O lance
+    // ocupa menos espaço em cabanas pequenas, mas continua sendo geometria
+    // real e conecta cada piso sucessivo.
+    if (hasStairs && floors >= 2 && minSpan >= 1.35) {
+      const steps = Math.max(4, Math.min(7, Math.round(floorH / 0.42)));
+      const stairWidth = Math.min(0.62, Math.max(0.42, minSpan * 0.3));
+      const stairRun = Math.min(Math.max(1.0, innerBounds.depth * 0.52), 1.85);
+      const stepDepth = stairRun / steps;
+      const stairX = innerBounds.minX + Math.min(innerBounds.width * 0.3, 0.7);
+      const stairZ = innerBounds.minZ + Math.max(0.18, innerBounds.depth * 0.12);
+      for (let f = 0; f < floors - 1; f++) {
         for (let s = 0; s < steps; s++) {
           const stepH = (floorH * (s + 1)) / (steps + 1);
-          const tread = new THREE.BoxGeometry(0.58, 0.12, 0.34).toNonIndexed();
-          tread.translate(stairX, y0 + stepH, stairZ + s * 0.24);
+          const tread = new THREE.BoxGeometry(stairWidth, 0.12, stepDepth + 0.025).toNonIndexed();
+          tread.translate(
+            stairX,
+            y0 + f * floorH + stepH,
+            stairZ + s * stepDepth
+          );
           trimParts.push(tread);
         }
+      }
+    }
 
-        // Baú, mesa de estudos e cama medieval nos andares superiores
+    if (minSpan >= 1.85) {
+      // Baú, mesa de estudos e cama medieval nos andares superiores
+      if (floors >= 2) {
         for (let f = 1; f < floors; f++) {
           const fy = y0 + f * floorH + 0.03;
           const chest = new THREE.BoxGeometry(0.68, 0.42, 0.44).toNonIndexed();

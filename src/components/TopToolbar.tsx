@@ -12,6 +12,7 @@ import {
   Footprints,
   Grid,
   ImagePlus,
+  Image as ImageIcon,
   Layers,
   Map as MapIcon,
   MousePointer,
@@ -65,6 +66,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
   const viewMode = useSceneStore((s) => s.viewMode);
   const showGrid = useSceneStore((s) => s.showGrid);
   const showReferenceOverlay = useSceneStore((s) => s.showReferenceOverlay);
+  const showProjectedImage = useSceneStore((s) => s.showProjectedImage);
   const stats = useSceneStore((s) => s.stats);
 
   const loadImageAndScene = useSceneStore((s) => s.loadImageAndScene);
@@ -75,6 +77,7 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
   const setViewMode = useSceneStore((s) => s.setViewMode);
   const setShowGrid = useSceneStore((s) => s.setShowGrid);
   const setShowReferenceOverlay = useSceneStore((s) => s.setShowReferenceOverlay);
+  const setShowProjectedImage = useSceneStore((s) => s.setShowProjectedImage);
   const setWorldScale = useSceneStore((s) => s.setWorldScale);
   const rerollWorldSeed = useSceneStore((s) => s.rerollWorldSeed);
   const requestSnapToProjector = useSceneStore((s) => s.requestSnapToProjector);
@@ -316,6 +319,22 @@ export const TopToolbar: React.FC<TopToolbarProps> = ({
           title="Sobrepor imagem original para calibrar"
         >
           <Eye className="w-3.5 h-3.5" />
+        </button>
+
+        <button
+          onClick={() => setShowProjectedImage(!showProjectedImage)}
+          className={`p-1.5 rounded border cursor-pointer ${
+            showProjectedImage
+              ? 'bg-indigo-900/60 border-indigo-600 text-indigo-200'
+              : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:bg-zinc-800'
+          }`}
+          title={
+            showProjectedImage
+              ? 'Esconder imagem projetada no terreno'
+              : 'Mostrar imagem projetada no terreno'
+          }
+        >
+          <ImageIcon className="w-3.5 h-3.5" />
         </button>
 
         <button

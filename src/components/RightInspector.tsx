@@ -67,6 +67,7 @@ export const RightInspector: React.FC = () => {
   const heightMapDataUrl = useSceneStore((s) => s.heightMapDataUrl);
   const normalMapDataUrl = useSceneStore((s) => s.normalMapDataUrl);
   const showReferenceOverlay = useSceneStore((s) => s.showReferenceOverlay);
+  const showProjectedImage = useSceneStore((s) => s.showProjectedImage);
   const overlayOpacity = useSceneStore((s) => s.overlayOpacity);
 
   const updateProjection = useSceneStore((s) => s.updateProjection);
@@ -76,6 +77,7 @@ export const RightInspector: React.FC = () => {
   const updateStructure = useSceneStore((s) => s.updateStructure);
   const updateProp = useSceneStore((s) => s.updateProp);
   const setOverlayOpacity = useSceneStore((s) => s.setOverlayOpacity);
+  const setShowProjectedImage = useSceneStore((s) => s.setShowProjectedImage);
   const runAIDepthEstimation = useSceneStore((s) => s.runAIDepthEstimation);
   const aiDepthField = useSceneStore((s) => s.aiDepthField);
   const aiDepthStatus = useSceneStore((s) => s.aiDepthStatus);
@@ -215,6 +217,18 @@ export const RightInspector: React.FC = () => {
                 className="accent-cyan-500"
               />
               <span>Pisos Internos</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={selectedStruct.hasStairs ?? selectedStruct.floors >= 2}
+                disabled={selectedStruct.floors < 2}
+                onChange={(e) =>
+                  updateStructure(selectedStruct.id, { hasStairs: e.target.checked })
+                }
+                className="accent-cyan-500 disabled:opacity-40"
+              />
+              <span>Escada / Acesso</span>
             </label>
           </div>
 
@@ -555,6 +569,15 @@ export const RightInspector: React.FC = () => {
             onChange={setOverlayOpacity}
           />
         )}
+        <label className="flex items-center gap-2 pt-1 cursor-pointer text-xs text-zinc-300">
+          <input
+            type="checkbox"
+            checked={showProjectedImage}
+            onChange={(e) => setShowProjectedImage(e.target.checked)}
+            className="accent-indigo-500"
+          />
+          <span>Imagem projetada no terreno</span>
+        </label>
       </section>
 
       {/* Terreno, Displacement & Normal Map */}

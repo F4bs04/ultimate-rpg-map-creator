@@ -221,6 +221,8 @@ export interface StructureDef {
   /** Quantidade de janelas procedurais com venezianas por parede (0..4) */
   windowsPerWall?: number;
   hasDoor?: boolean;
+  /** Gera escada interna e habilita a troca de piso no Modo Exploração. */
+  hasStairs?: boolean;
   hasChimney?: boolean;
   roofType: RoofType;
   roofPitchDeg: number;
