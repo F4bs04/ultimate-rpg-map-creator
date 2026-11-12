@@ -100,12 +100,21 @@ export interface WorldBiomeStats {
   stoneRatio: number;
 }
 
+export interface EdgeHeights {
+  north: number[];
+  south: number[];
+  west: number[];
+  east: number[];
+}
+
 export interface EdgeStrips {
-  /** Amostras RGB [r,g,b] ao longo de cada borda (ex.: 16 amostras) para dissolver emendas */
+  /** Amostras RGB [r,g,b] ao longo de cada borda (ex.: 48 amostras) para dissolver emendas */
   north: [number, number, number][];
   south: [number, number, number][];
   west: [number, number, number][];
   east: [number, number, number][];
+  /** Elevações normalizadas [0..1] nas 4 bordas do terreno âncora para costura sem degrau */
+  heights?: EdgeHeights;
 }
 
 export interface IsoWorldKit {
@@ -324,7 +333,7 @@ export function createDefaultWorldGrammar(): WorldGrammarConfig {
 
 export function createDefaultReconstructionConfig(): ReconstructionConfig {
   return {
-    mode: 'semantic_rebuild',
+    mode: 'projection_compat',
     semanticFidelity: 0.86,
     detectTerrainFeatures: true,
     detectVegetation: true,

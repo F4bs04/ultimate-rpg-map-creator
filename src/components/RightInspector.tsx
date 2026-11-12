@@ -478,18 +478,19 @@ export const RightInspector: React.FC = () => {
           <span>Reconstrução do Mapa</span>
         </div>
         <select
-          value={scene.reconstruction?.mode ?? 'semantic_rebuild'}
+          value={scene.reconstruction?.mode ?? 'projection_compat'}
           onChange={(e) =>
             setReconstructionMode(e.target.value as ReconstructionMode)
           }
           className="w-full px-2 py-1.5 rounded bg-zinc-950 border border-zinc-700 text-xs"
         >
-          <option value="semantic_rebuild">Reconstrução procedural (recomendado)</option>
-          <option value="projection_compat">Compatibilidade com projeção 2D</option>
+          <option value="projection_compat">Híbrido: Mapa 2D no Terreno + Assets 3D (recomendado)</option>
+          <option value="semantic_rebuild">Somente Procedural (sem imagem no terreno)</option>
         </select>
         <p className="text-[10px] leading-relaxed text-zinc-500">
-          O modo procedural transforma regiões da imagem em terreno, vegetação,
-          modelos e estruturas nativas. A imagem não é aplicada sobre a malha.
+          O modo híbrido mantém a arte pintada do mapa no terreno (com costura
+          contínua no mundo aberto) e constrói telhados, árvores e edifícios em
+          3D nativo sem distorção.
         </p>
       </section>
 

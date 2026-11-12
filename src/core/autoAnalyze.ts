@@ -372,7 +372,7 @@ export function analyzeImageToIsoDSL(
         : hasWater || foliageClusters.length > 0
         ? 'semantic_outdoor'
         : 'luminance',
-      textureMode: 'procedural',
+      textureMode: 'hybrid',
       fallbackMaterial: isInterior
         ? warmWoodRatio > 0.3
           ? 'wood_plank'

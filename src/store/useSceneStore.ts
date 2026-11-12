@@ -15,6 +15,7 @@ import {
   type GeneratedWorldExpansion,
 } from '../core/worldBuilder';
 import {
+  attachEdgeHeightsToKit,
   extractWorldKitFromImage,
   mergeImageIntoWorldKit,
 } from '../core/worldKit';
@@ -316,13 +317,13 @@ export const useSceneStore = create<SceneStore>((set, get) => ({
       buffer.height,
       baseScene.meta.name
     );
-    const kit = synthesizePainterlyWorldKit(
+    const synthesizedKit = synthesizePainterlyWorldKit(
       rawKit,
       baseScene.worldGrammar.seed
     );
-    baseScene = { ...baseScene, kit };
-
     const maps = buildMapsFromBuffer(buffer, baseScene.terrain, null);
+    const kit = attachEdgeHeightsToKit(synthesizedKit, maps.heightField);
+    baseScene = { ...baseScene, kit };
     if (autoTranslate && !customScene) {
       baseScene = {
         ...baseScene,
@@ -529,8 +530,12 @@ export const useSceneStore = create<SceneStore>((set, get) => ({
       kit: worldKit ?? undefined,
     };
     const maps = buildMapsFromBuffer(analysisBuffer, translated.terrain, aiDepthField);
+    const nextKit = worldKit
+      ? attachEdgeHeightsToKit(worldKit, maps.heightField)
+      : null;
     translated = {
       ...translated,
+      kit: nextKit ?? undefined,
       props: translated.props.map((prop) => {
         const u = prop.position[0] / translated.terrain.width + 0.5;
         const v = 1 - (prop.position[2] / translated.terrain.depth + 0.5);
@@ -571,9 +576,10 @@ export const useSceneStore = create<SceneStore>((set, get) => ({
         };
       }),
     };
-    const worldExpansion = computeExpansionIfNeeded(translated, worldKit);
+    const worldExpansion = computeExpansionIfNeeded(translated, nextKit);
     set({
       scene: translated,
+      worldKit: nextKit,
       worldExpansion,
       selectedItem: null,
       snapRequestCount: get().snapRequestCount + 1,
@@ -620,9 +626,20 @@ export const useSceneStore = create<SceneStore>((set, get) => ({
   },
 
   recomputeMaps: () => {
-    const { analysisBuffer, scene, aiDepthField } = get();
+    const { analysisBuffer, scene, aiDepthField, worldKit } = get();
     if (!analysisBuffer) return;
     const maps = buildMapsFromBuffer(analysisBuffer, scene.terrain, aiDepthField);
+    if (worldKit) {
+      const nextKit = attachEdgeHeightsToKit(worldKit, maps.heightField);
+      const nextScene = { ...scene, kit: nextKit };
+      set({
+        ...maps,
+        worldKit: nextKit,
+        scene: nextScene,
+        worldExpansion: computeExpansionIfNeeded(nextScene, nextKit),
+      });
+      return;
+    }
     set(maps);
   },
 

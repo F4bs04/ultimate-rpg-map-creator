@@ -34,6 +34,8 @@ import {
 } from '../worldNav';
 import {
   PROJECTION_PRESETS,
+  createDefaultReconstructionConfig,
+  getEffectiveTextureMode,
   type PropDef,
   type StructureDef,
   type TerrainConfig,
@@ -65,6 +67,7 @@ import {
 } from '../textureTool';
 import { buildMultiScaleWorld } from '../worldBuilder';
 import {
+  attachEdgeHeightsToKit,
   detectBorderPortals,
   extractEdgeStrips,
   extractWorldKitFromImage,
@@ -920,6 +923,41 @@ describe('mapLibrary (Abrir, Salvar & Biblioteca de Mapas)', () => {
 
     const afterDel = deleteSavedMap(saved.entry.id, mockStorage);
     expect(afterDel.length).toBe(1);
+  });
+
+  it('preserva modo híbrido no terreno âncora e casa altura da borda nos chunks vizinhos sem recorte', () => {
+    const vila = createVilaMedievalScene();
+    expect(createDefaultReconstructionConfig().mode).toBe('projection_compat');
+    expect(getEffectiveTextureMode(vila, vila.terrain.textureMode)).toBe('hybrid');
+
+    const w = 48;
+    const h = 48;
+    const rgba = new Uint8ClampedArray(w * h * 4);
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        const i = (y * w + x) * 4;
+        rgba[i] = 140;
+        rgba[i + 1] = 180;
+        rgba[i + 2] = 85;
+        rgba[i + 3] = 255;
+      }
+    }
+    const hf = computeHeightField(rgba, w, h, {
+      smoothRadius: 0,
+      invertHeight: false,
+    });
+    // Simula relevo alto (0.82) na borda leste
+    for (let y = 0; y < h; y++) {
+      hf.macroHeight[y * w + (w - 1)] = 0.82;
+    }
+    const rawKit = extractWorldKitFromImage(rgba, w, h, 'Teste Costura');
+    const kit = attachEdgeHeightsToKit(rawKit, hf);
+    const world = buildMultiScaleWorld(vila, kit);
+    const eastChunk = world.chunks.find((c) => c.gx === 1 && c.gz === 0)!;
+    expect(eastChunk.heightField).toBeDefined();
+    // Coluna esquerda (px = 0) do chunk leste encosta na borda leste do âncora (~0.82)
+    const seamHeight = eastChunk.heightField![Math.floor(eastChunk.heightHeight! / 2) * eastChunk.heightWidth!];
+    expect(seamHeight).toBeGreaterThan(0.75);
   });
 });
 

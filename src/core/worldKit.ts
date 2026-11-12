@@ -12,6 +12,8 @@ import {
   heightFieldToNormalRGBA,
   isWaterPixel,
   rgbaToDataUrl,
+  sampleHeightAtUV,
+  type HeightFieldResult,
 } from './imageMaps';
 
 export interface SwatchPixelBuffer {
@@ -46,8 +48,10 @@ export function extractEdgeStrips(
   rgba: Uint8ClampedArray,
   width: number,
   height: number,
-  samples = 24
+  samples = 48
 ): EdgeStrips {
+  const insetX = Math.max(2, Math.min(10, Math.round(width * 0.018)));
+  const insetY = Math.max(2, Math.min(10, Math.round(height * 0.018)));
   const sampleAvg = (cx: number, cy: number): [number, number, number] => {
     let sr = 0;
     let sg = 0;
@@ -73,16 +77,61 @@ export function extractEdgeStrips(
   const east: [number, number, number][] = [];
 
   for (let i = 0; i < samples; i++) {
-    const t = (i + 0.5) / samples;
-    const x = Math.min(width - 1, Math.floor(t * width));
-    const y = Math.min(height - 1, Math.floor(t * height));
-    north.push(sampleAvg(x, 2));
-    south.push(sampleAvg(x, height - 3));
-    west.push(sampleAvg(2, y));
-    east.push(sampleAvg(width - 3, y));
+    const t = samples > 1 ? i / (samples - 1) : 0.5;
+    const x = Math.min(width - 1, Math.max(0, Math.round(t * (width - 1))));
+    const y = Math.min(height - 1, Math.max(0, Math.round(t * (height - 1))));
+    north.push(sampleAvg(x, Math.min(height - 1, insetY)));
+    south.push(sampleAvg(x, Math.max(0, height - 1 - insetY)));
+    west.push(sampleAvg(Math.min(width - 1, insetX), y));
+    east.push(sampleAvg(Math.max(0, width - 1 - insetX), y));
   }
 
   return { north, south, west, east };
+}
+
+/**
+ * Registra os perfis exatos de elevação [0..1] das 4 bordas do terreno central
+ * dentro do IsoWorldKit para que os chunks vizinhos casem em altura sem degrau.
+ */
+export function attachEdgeHeightsToKit(
+  kit: IsoWorldKit,
+  heightField: Pick<HeightFieldResult, 'macroHeight' | 'width' | 'height'> | null | undefined,
+  samples = 48
+): IsoWorldKit {
+  if (!heightField || !kit.edgeStrips) return kit;
+  const smoothStrip = (arr: number[]): number[] =>
+    arr.map((v, i) => {
+      const prev = arr[Math.max(0, i - 1)];
+      const next = arr[Math.min(arr.length - 1, i + 1)];
+      return Number((prev * 0.25 + v * 0.5 + next * 0.25).toFixed(4));
+    });
+
+  const north: number[] = [];
+  const south: number[] = [];
+  const west: number[] = [];
+  const east: number[] = [];
+  const { macroHeight, width, height } = heightField;
+
+  for (let i = 0; i < samples; i++) {
+    const t = samples > 1 ? i / (samples - 1) : 0.5;
+    north.push(sampleHeightAtUV(macroHeight, width, height, t, 1));
+    south.push(sampleHeightAtUV(macroHeight, width, height, t, 0));
+    west.push(sampleHeightAtUV(macroHeight, width, height, 0, 1 - t));
+    east.push(sampleHeightAtUV(macroHeight, width, height, 1, 1 - t));
+  }
+
+  return {
+    ...kit,
+    edgeStrips: {
+      ...kit.edgeStrips,
+      heights: {
+        north: smoothStrip(north),
+        south: smoothStrip(south),
+        west: smoothStrip(west),
+        east: smoothStrip(east),
+      },
+    },
+  };
 }
 
 export const SWATCH_CATEGORY_LABELS: Record<SwatchCategory, string> = {

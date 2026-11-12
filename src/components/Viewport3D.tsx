@@ -826,6 +826,7 @@ export const Viewport3D: React.FC = () => {
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.wrapS = THREE.ClampToEdgeWrapping;
       tex.wrapT = THREE.ClampToEdgeWrapping;
+      tex.anisotropy = Math.min(8, ref.renderer.capabilities.getMaxAnisotropy());
       tex.needsUpdate = true;
       ref.sourceTexture?.dispose();
       ref.sourceTexture = tex;
@@ -929,8 +930,15 @@ export const Viewport3D: React.FC = () => {
       sceneData.terrain.textureMode
     );
 
-    // 1. Terreno com Displacement Map + Normal Map
+    // 1. Terreno com Displacement assado na malha + Normal Map (alinha 1:1 com chunks vizinhos)
     const terrainRaw = buildTerrainBaseGeometry(sceneData.terrain);
+    if (heightField) {
+      bakeTerrainDisplacementIntoGeometry(
+        terrainRaw,
+        heightField,
+        sceneData.terrain.displacementScale
+      );
+    }
     const terrainGeom = bakeProjectedUVs(terrainRaw, identity, projector, {
       textureMode: effectiveTerrainMode,
       proceduralTileScale: 0.25,
@@ -945,8 +953,8 @@ export const Viewport3D: React.FC = () => {
         sceneData.terrain.normalStrength * 0.45,
         sceneData.terrain.normalStrength * 0.45
       ),
-      displacementMap: ref.heightTexture,
-      displacementScale: sceneData.terrain.displacementScale,
+      displacementMap: heightField ? null : ref.heightTexture,
+      displacementScale: heightField ? 0 : sceneData.terrain.displacementScale,
       roughness: 0.88,
       metalness: 0.04,
     });
@@ -955,8 +963,8 @@ export const Viewport3D: React.FC = () => {
       false,
       worldKit
     );
-    terrainFallbackMat.displacementMap = ref.heightTexture;
-    terrainFallbackMat.displacementScale = sceneData.terrain.displacementScale;
+    terrainFallbackMat.displacementMap = heightField ? null : ref.heightTexture;
+    terrainFallbackMat.displacementScale = heightField ? 0 : sceneData.terrain.displacementScale;
 
     const terrainMesh = new THREE.Mesh(
       terrainGeom,
@@ -966,6 +974,7 @@ export const Viewport3D: React.FC = () => {
         terrainFallbackMat
       )
     );
+    terrainMesh.castShadow = true;
     terrainMesh.receiveShadow = true;
     terrainMesh.name = 'Terrain';
     terrainMesh.userData = { walkSurface: 'terrain' };
@@ -1031,9 +1040,9 @@ export const Viewport3D: React.FC = () => {
     }
 
     // Plano de água opcional estendido até o horizonte de mundo aberto
-    const hasReconstructedWater = Boolean(
-      sceneData.terrainFeatures?.some((feature) => feature.kind === 'water')
-    );
+    const hasReconstructedWater =
+      effectiveTerrainMode === 'procedural' &&
+      Boolean(sceneData.terrainFeatures?.some((feature) => feature.kind === 'water'));
     if (sceneData.terrain.waterEnabled && !hasReconstructedWater) {
       const waterGeom = new THREE.PlaneGeometry(
         worldWidthSpan * 2.8,
@@ -1053,9 +1062,9 @@ export const Viewport3D: React.FC = () => {
       ref.worldGroup.add(waterMesh);
     }
 
-    // A imagem âncora agora vira regiões de terreno reais: rios e estradas
-    // continuam visíveis mesmo quando a textura projetada está desligada.
-    for (const feature of sceneData.terrainFeatures ?? []) {
+    // Faixas vetoriais de terreno reconstruído (rios/estradas) aparecem somente no modo
+    // puramente procedural; no modo híbrido a imagem pintada já exibe estradas e margens nativas.
+    for (const feature of effectiveTerrainMode === 'procedural' ? sceneData.terrainFeatures ?? [] : []) {
       const featureGeom = buildTerrainFeatureGeometry(feature);
       if (!featureGeom) continue;
       const preset =
@@ -1084,36 +1093,37 @@ export const Viewport3D: React.FC = () => {
       ref.worldGroup.add(featureMesh);
     }
 
-    // Portais WFC continuam como faixas geométricas reais nos chunks vizinhos.
-    // Isto evita depender de um plano de água global para representar rios
-    // expandidos e mantém as estradas navegáveis no modo de reconstrução.
-    for (const chunk of worldExpansion?.chunks ?? []) {
-      for (const segment of chunk.segments) {
-        const segmentFeature = {
-          id: `chunk_${chunk.gx}_${chunk.gz}_${segment.kind}_${segment.x0}_${segment.z0}`,
-          kind: segment.kind,
-          points: [[segment.x0, segment.z0], [segment.x1, segment.z1]] as [number, number][],
-          width: segment.width,
-          elevation:
-            segment.kind === 'water'
-              ? sceneData.terrain.waterElevation
-              : sceneData.terrain.displacementScale * 0.46,
-          material: segment.kind === 'water' ? 'water_surface' as const : 'road_dirt' as const,
-          visible: true,
-        };
-        const segmentGeom = buildTerrainFeatureGeometry(segmentFeature);
-        if (!segmentGeom) continue;
-        const segmentMat = makeFallbackMaterial(
-          segmentFeature.material,
-          false,
-          worldKit
-        );
-        segmentMat.transparent = segment.kind === 'water';
-        if (segment.kind === 'water') segmentMat.opacity = 0.84;
-        const segmentMesh = new THREE.Mesh(segmentGeom, segmentMat);
-        segmentMesh.name = segmentFeature.id;
-        segmentMesh.receiveShadow = true;
-        ref.worldGroup.add(segmentMesh);
+    // Faixas vetoriais de portais WFC só são necessárias no modo puramente procedural;
+    // no modo híbrido a própria textura/relevo do chunk + plano de água desenham estradas e rios sem costura.
+    if (effectiveTerrainMode === 'procedural') {
+      for (const chunk of worldExpansion?.chunks ?? []) {
+        for (const segment of chunk.segments) {
+          const segmentFeature = {
+            id: `chunk_${chunk.gx}_${chunk.gz}_${segment.kind}_${segment.x0}_${segment.z0}`,
+            kind: segment.kind,
+            points: [[segment.x0, segment.z0], [segment.x1, segment.z1]] as [number, number][],
+            width: segment.width,
+            elevation:
+              segment.kind === 'water'
+                ? sceneData.terrain.waterElevation
+                : sceneData.terrain.displacementScale * 0.46,
+            material: segment.kind === 'water' ? 'water_surface' as const : 'road_dirt' as const,
+            visible: true,
+          };
+          const segmentGeom = buildTerrainFeatureGeometry(segmentFeature);
+          if (!segmentGeom) continue;
+          const segmentMat = makeFallbackMaterial(
+            segmentFeature.material,
+            false,
+            worldKit
+          );
+          segmentMat.transparent = segment.kind === 'water';
+          if (segment.kind === 'water') segmentMat.opacity = 0.84;
+          const segmentMesh = new THREE.Mesh(segmentGeom, segmentMat);
+          segmentMesh.name = segmentFeature.id;
+          segmentMesh.receiveShadow = true;
+          ref.worldGroup.add(segmentMesh);
+        }
       }
     }
 
@@ -1570,6 +1580,7 @@ export const Viewport3D: React.FC = () => {
     worldKit,
     worldExpansion,
     selectedItem,
+    heightField,
     heightMapDataUrl,
     normalMapDataUrl,
     sourceImageUrl,

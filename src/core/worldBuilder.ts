@@ -149,6 +149,18 @@ function sampleEdgeStrip(
   ];
 }
 
+function sampleEdgeScalar(
+  strip: number[] | undefined,
+  t: number
+): number | null {
+  if (!strip || strip.length === 0) return null;
+  const f = Math.min(1, Math.max(0, t)) * (strip.length - 1);
+  const i0 = Math.floor(f);
+  const i1 = Math.min(strip.length - 1, i0 + 1);
+  const frac = f - i0;
+  return strip[i0] + (strip[i1] - strip[i0]) * frac;
+}
+
 function distToSegment2D(
   px: number,
   pz: number,
@@ -554,8 +566,8 @@ export function buildMultiScaleWorld(
         : distRing >= 3
         ? 8
         : distRing === 2
-        ? 14
-        : 26;
+        ? 16
+        : 36;
       chunks.push({
         gx,
         gz,
@@ -674,14 +686,14 @@ export function buildMultiScaleWorld(
       return x > minX - 1.2 && x < maxX + 1.2 && z > minZ - 1.2 && z < maxZ + 1.2;
     });
 
-  const featherDist = Math.max(4.5, Math.min(chunkW, chunkD) * 0.22);
+  const featherDist = Math.max(6.0, Math.min(chunkW, chunkD) * 0.28);
   const halfAnchorW = chunkW * 0.5;
   const halfAnchorD = chunkD * 0.5;
 
   for (const chunk of chunks) {
     if (chunk.isAnchor) continue;
     const distRing = Math.max(Math.abs(chunk.gx), Math.abs(chunk.gz));
-    const texRes = distRing >= 3 ? 60 : chunk.isOuterLOD ? 88 : 144;
+    const texRes = distRing >= 3 ? 60 : chunk.isOuterLOD ? 88 : 192;
     const rgba = new Uint8ClampedArray(texRes * texRes * 4);
     const heightField = new Float32Array(texRes * texRes);
 
@@ -717,37 +729,71 @@ export function buildMultiScaleWorld(
           b = b * (1 - waterBlend) + waterSample[2] * waterBlend;
         }
 
-        // Suavização na borda do chunk âncora (0,0) usando edgeStrips reais da imagem original
+        // Suavização contínua na borda do chunk âncora (0,0): converge 100% para a cor e
+        // altura reais da margem da imagem (com interpolação nas quinas) eliminando o retângulo de recorte.
         let finalHeight = heightNorm;
-        if (kit?.edgeStrips && waterBlend < 0.25 && roadBlend < 0.35) {
-          const dxOut = Math.max(0, Math.abs(wx) - halfAnchorW);
-          const dzOut = Math.max(0, Math.abs(wz) - halfAnchorD);
-          const distFromAnchor = Math.hypot(dxOut, dzOut);
-          if (distFromAnchor < featherDist) {
-            const t = distFromAnchor / featherDist;
-            const wBlend = (1 - t * t * (3 - 2 * t)) * 0.78;
-            let edgeColor: [number, number, number] | null = null;
-            if (dxOut >= dzOut) {
-              const tv = (wz + halfAnchorD) / chunkD;
-              edgeColor = sampleEdgeStrip(
-                wx < 0 ? kit.edgeStrips.west : kit.edgeStrips.east,
-                tv
-              );
-            } else {
-              const tu = (wx + halfAnchorW) / chunkW;
-              edgeColor = sampleEdgeStrip(
-                wz < 0 ? kit.edgeStrips.north : kit.edgeStrips.south,
-                tu
-              );
-            }
-            if (edgeColor) {
-              r = r * (1 - wBlend) + edgeColor[0] * wBlend;
-              g = g * (1 - wBlend) + edgeColor[1] * wBlend;
-              b = b * (1 - wBlend) + edgeColor[2] * wBlend;
-            }
-            // Altura também converge suavemente para o nível base das margens do âncora
-            finalHeight = finalHeight * (1 - wBlend * 0.65) + 0.54 * (wBlend * 0.65);
+        const dxOut = Math.max(0, Math.abs(wx) - halfAnchorW);
+        const dzOut = Math.max(0, Math.abs(wz) - halfAnchorD);
+        const distFromAnchor = Math.hypot(dxOut, dzOut);
+
+        if (kit?.edgeStrips && distFromAnchor < featherDist) {
+          const t = distFromAnchor / featherDist;
+          const wEdge = 1 - t * t * (3 - 2 * t); // 1.0 na borda exata, 0.0 após featherDist
+          const tv = Math.min(1, Math.max(0, (wz + halfAnchorD) / chunkD));
+          const tu = Math.min(1, Math.max(0, (wx + halfAnchorW) / chunkW));
+
+          const colorEW = dxOut > 0
+            ? sampleEdgeStrip(wx < 0 ? kit.edgeStrips.west : kit.edgeStrips.east, tv)
+            : null;
+          const colorNS = dzOut > 0
+            ? sampleEdgeStrip(wz < 0 ? kit.edgeStrips.north : kit.edgeStrips.south, tu)
+            : null;
+
+          let edgeColor: [number, number, number] | null = colorEW ?? colorNS;
+          if (colorEW && colorNS) {
+            const cw = dxOut / Math.max(1e-5, dxOut + dzOut);
+            edgeColor = [
+              colorEW[0] * cw + colorNS[0] * (1 - cw),
+              colorEW[1] * cw + colorNS[1] * (1 - cw),
+              colorEW[2] * cw + colorNS[2] * (1 - cw),
+            ];
           }
+
+          if (edgeColor) {
+            const pathMask = Math.max(waterBlend, roadBlend);
+            const colorBlend = wEdge * (1 - pathMask * 0.45);
+            r = r * (1 - colorBlend) + edgeColor[0] * colorBlend;
+            g = g * (1 - colorBlend) + edgeColor[1] * colorBlend;
+            b = b * (1 - colorBlend) + edgeColor[2] * colorBlend;
+          }
+
+          const heights = kit.edgeStrips.heights;
+          const hEW =
+            heights && dxOut > 0
+              ? sampleEdgeScalar(wx < 0 ? heights.west : heights.east, tv)
+              : null;
+          const hNS =
+            heights && dzOut > 0
+              ? sampleEdgeScalar(wz < 0 ? heights.north : heights.south, tu)
+              : null;
+
+          let edgeHeight: number | null = hEW ?? hNS;
+          if (hEW !== null && hNS !== null) {
+            const cw = dxOut / Math.max(1e-5, dxOut + dzOut);
+            edgeHeight = hEW * cw + hNS * (1 - cw);
+          } else if (edgeHeight === null) {
+            edgeHeight = 0.5;
+          }
+          finalHeight = finalHeight * (1 - wEdge) + edgeHeight * wEdge;
+        }
+
+        // Micro-grão sutil fora da área central para integrar resolução com o mapa pintado
+        if (distFromAnchor > 1.2) {
+          const grainFade = Math.min(1, (distFromAnchor - 1.2) / 3.0);
+          const grain = (hash2D(Math.floor(wx * 3.5), Math.floor(wz * 3.5), grammar.seed) - 0.5) * 9 * grainFade;
+          r += grain;
+          g += grain * 1.05;
+          b += grain * 0.8;
         }
 
         heightField[cellIdx] = finalHeight;
