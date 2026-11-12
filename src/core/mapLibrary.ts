@@ -9,9 +9,11 @@ import { createPortoRustymapsScene } from './portoRustymapsScene';
 import { createRuinasRioMediumScene } from './ruinasRioScene';
 import { generateIsometricSample, generateTopDownSample } from './sampleScenes';
 import { createTavernaMedievalScene } from './tavernaMedievalScene';
+import { createValeRegionalScene } from './valeRegionalScene';
 import { createVilaMedievalScene } from './vilaMedievalScene';
 
 export type MapCategory =
+  | 'Regional'
   | 'Porto'
   | 'Cidade'
   | 'Interno'
@@ -69,6 +71,20 @@ export interface StorageLike {
 const STORAGE_KEY = 'isoforge.savedMaps.v1';
 
 export const BUILTIN_MAPS: BuiltinMapEntry[] = [
+  {
+    id: 'vale-regional',
+    name: 'Vale dos Rios & Província (Grande 9×9)',
+    category: 'Regional',
+    description:
+      'Província regional com 2 rios, bacia/represa com moinho, solar feudal murado, cascata com torreão, pontes, fazendas e nuvens no céu.',
+    previewUrl: '/maps/vale-regional.jpg',
+    environmentMode: 'outdoor',
+    recommendedScale: 'large',
+    load: () => ({
+      imageUrl: '/maps/vale-regional.jpg',
+      scene: createValeRegionalScene(),
+    }),
+  },
   {
     id: 'porto-rustymaps',
     name: 'Porto & Cidadela Fluvial (Rustymaps)',

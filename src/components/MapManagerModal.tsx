@@ -37,6 +37,7 @@ interface MapManagerModalProps {
 
 const CATEGORIES: ('Todos' | MapCategory)[] = [
   'Todos',
+  'Regional',
   'Porto',
   'Cidade',
   'Interno',

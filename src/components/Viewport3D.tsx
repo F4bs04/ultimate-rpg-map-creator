@@ -325,7 +325,7 @@ export const Viewport3D: React.FC = () => {
     const controls = new OrbitControls(orbitCamera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
-    controls.maxDistance = 680;
+    controls.maxDistance = 2600;
     controls.maxPolarAngle = Math.PI * 0.49;
 
     const ambientLight = new THREE.HemisphereLight('#d6e6ff', '#2c2520', 0.65);
@@ -898,10 +898,10 @@ export const Viewport3D: React.FC = () => {
     const yawRad = THREE.MathUtils.degToRad(effectiveYaw);
     const scaleMult =
       sceneData.worldGrammar.scale === 'large'
-        ? 4.0
+        ? 1.35
         : sceneData.worldGrammar.scale === 'medium'
-        ? 2.6
-        : 1.5;
+        ? 1.5
+        : 1.4;
     const dist = Math.max(14, p.orthoScale * scaleMult);
     const horiz = Math.cos(pitchRad) * dist;
     ref.orbitCamera.position.set(

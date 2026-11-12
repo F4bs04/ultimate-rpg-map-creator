@@ -8,6 +8,7 @@ import { Viewport3D } from './components/Viewport3D';
 import { createCidadeMedievalScene } from './core/cidadeMedievalScene';
 import { createPortoRustymapsScene } from './core/portoRustymapsScene';
 import { createTavernaMedievalScene } from './core/tavernaMedievalScene';
+import { createValeRegionalScene } from './core/valeRegionalScene';
 import { generateIsometricSample } from './core/sampleScenes';
 import { useSceneStore } from './store/useSceneStore';
 
@@ -26,8 +27,15 @@ export const App: React.FC = () => {
   });
   const loadImageAndScene = useSceneStore((s) => s.loadImageAndScene);
 
-  // Carrega cena inicial (com suporte a ?map=cidade, ?map=taverna, ?map=vila, etc.)
+  // Carrega cena inicial (com suporte a ?map=vale, ?map=porto, ?map=cidade, ?map=taverna)
   useEffect(() => {
+    if (initialMapParam === 'porto') {
+      loadImageAndScene(
+        '/maps/porto-rustymaps.jpg',
+        createPortoRustymapsScene()
+      );
+      return;
+    }
     if (initialMapParam === 'cidade') {
       loadImageAndScene(
         '/maps/cidade-medieval-rustymaps.jpg',
@@ -43,17 +51,18 @@ export const App: React.FC = () => {
       return;
     }
 
+    // Carrega o novo Vale dos Rios & Província Agrícola como cena padrão
     loadImageAndScene(
-      '/maps/porto-rustymaps.jpg',
-      createPortoRustymapsScene()
+      '/maps/vale-regional.jpg',
+      createValeRegionalScene()
     ).catch(() => {
       loadImageAndScene(
-        '/maps/cidade-medieval-rustymaps.jpg',
-        createCidadeMedievalScene()
+        '/maps/porto-rustymaps.jpg',
+        createPortoRustymapsScene()
       ).catch(() => {
         loadImageAndScene(
-          '/maps/taverna-medieval.jpg',
-          createTavernaMedievalScene()
+          '/maps/cidade-medieval-rustymaps.jpg',
+          createCidadeMedievalScene()
         ).catch(() => {
           const sample = generateIsometricSample();
           loadImageAndScene(sample.imageDataUrl, sample.scene);

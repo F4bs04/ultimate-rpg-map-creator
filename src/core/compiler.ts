@@ -1268,6 +1268,36 @@ export function buildPropGeometryBundle(prop: PropDef): PropGeometryBundle {
       parts.push(p1, p2);
       break;
     }
+    case 'cloud': {
+      // Nuvem volumétrica estilizada flutuando (aglomerado de icosaedros achatados)
+      const c1 = new THREE.IcosahedronGeometry(1.5, 1);
+      c1.scale(2.4, 0.65, 1.5);
+      c1.translate(0, 0, 0);
+      const c2 = new THREE.IcosahedronGeometry(1.2, 1);
+      c2.scale(1.7, 0.6, 1.25);
+      c2.translate(1.5, -0.08, 0.35);
+      const c3 = new THREE.IcosahedronGeometry(1.15, 1);
+      c3.scale(1.6, 0.55, 1.15);
+      c3.translate(-1.4, -0.1, -0.28);
+      const c4 = new THREE.IcosahedronGeometry(0.95, 1);
+      c4.scale(1.3, 0.52, 1.05);
+      c4.translate(0.35, 0.38, -0.32);
+      parts.push(c1, c2, c3, c4);
+      break;
+    }
+    case 'watermill': {
+      // Roda d'água mecânica com eixo e aletas radiais
+      const hub = new THREE.CylinderGeometry(0.35, 0.35, 0.7, 8).toNonIndexed();
+      hub.rotateZ(Math.PI / 2);
+      hub.translate(0, 1.2, 0);
+      const rim = new THREE.TorusGeometry(1.15, 0.08, 6, 12).toNonIndexed();
+      rim.rotateY(Math.PI / 2);
+      rim.translate(0, 1.2, 0);
+      const axle = new THREE.BoxGeometry(0.9, 0.12, 0.12).toNonIndexed();
+      axle.translate(0, 1.2, 0);
+      parts.push(hub, rim, axle);
+      break;
+    }
   }
 
   return mergeGroupedPropParts([{ parts, material: prop.fallbackMaterial }]);

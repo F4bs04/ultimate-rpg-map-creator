@@ -8,15 +8,24 @@
 [![Engines](https://img.shields.io/badge/Export-Godot_4_%7C_Unity_%7C_GLTF-blueviolet.svg?style=flat-square)](https://godotengine.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
-Ferramenta web moderna desenvolvida em **React 18 + TypeScript + Three.js** que reconstrói ilustrações 2D (**Top-Down** e **Isométricas** desenhadas à mão) como cenários 3D ultraleves prontos para **WebGL, Godot 4, Unity e Unreal**, sem malhas infladas ou distorções, empregando **leitura semântica de regiões**, **primitivas paramétricas**, **materiais procedurais**, **Displacement & Normal Maps Sobel 3×3**, **Absorção Multi-Imagem (`IsoWorldKit`)** e **Wave Function Collapse (WFC)** em escalas **Pequeno (1×1)**, **Médio (3×3)** e **Grande (5×5 e 9×9)**.
+Ferramenta web moderna desenvolvida em **React 18 + TypeScript + Three.js** que reconstrói ilustrações 2D (**Top-Down** e **Isométricas** desenhadas à mão) como cenários 3D ultraleves prontos para **WebGL, Godot 4, Unity e Unreal**, sem malhas infladas ou distorções, empregando **leitura semântica de regiões**, **primitivas paramétricas**, **materiais procedurais**, **Displacement & Normal Maps Sobel 3×3**, **Absorção Multi-Imagem (`IsoWorldKit`)** e **Wave Function Collapse (WFC)** em escalas **Pequeno (1×1 / 3×3)**, **Médio (5×5)** e **Grande (9×9 com 81 chunks)**.
 
-![Porto 3D Showcase](docs/screenshots/porto-3d-showcase.png)
+![Vale dos Rios e Província 3D](docs/screenshots/vale-regional-3d.png)
 
 ---
 
 ## 🌟 Vitrine Visual: 2D Original vs Reconstrução 3D
 
-### 1. Porto & Cidadela Fluvial (Rustymaps)
+### 1. Vale dos Rios & Província Agrícola (Stress Test Regional 9×9 · 81 Chunks)
+*Província regional de grande porte: 2 rios com meandros e corredeiras, bacia/represa central com moinho d'água mecânico, grande solar feudal murado, aldeia da cascata com torreão de pedra, 3 pontes, fazendas com retalhos de cultivo e 5 nuvens volumétricas 3D flutuando no céu com sombras no terreno.*
+
+| Imagem 2D Original (742×960) | Reconstrução 3D Procedural (720k+ tris · 81 chunks) |
+| :---: | :---: |
+| <img src="docs/screenshots/original-vale-2d.jpg" width="480" alt="Vale 2D Original"/> | <img src="docs/screenshots/vale-regional-3d.png" width="480" alt="Vale 3D Regional"/> |
+
+---
+
+### 2. Porto & Cidadela Fluvial (Rustymaps)
 *Rio diagonal em calha orgânica, pontes de pedra, píeres com barcos e fortaleza em encosta rochosa em um mundo WFC 5×5 contínuo.*
 
 | Imagem 2D Original | Reconstrução 3D Procedural |
@@ -25,7 +34,7 @@ Ferramenta web moderna desenvolvida em **React 18 + TypeScript + Three.js** que 
 
 ---
 
-### 2. Cidade Medieval de Grande Porte (Stress Test 80+ Edifícios)
+### 3. Cidade Medieval de Grande Porte (Stress Test 80+ Edifícios)
 *Cidade completa com 70+ residências em enxaimel, praça circular com fonte, templo em rotunda e estradas que se ramificam naturalmente pelo bioma adjacente.*
 
 | Imagem 2D Original | Reconstrução 3D Procedural |
@@ -34,7 +43,7 @@ Ferramenta web moderna desenvolvida em **React 18 + TypeScript + Three.js** que 
 
 ---
 
-### 3. Taverna Medieval (Ambiente Interno / Dungeon Crawler)
+### 4. Taverna Medieval (Ambiente Interno / Dungeon Crawler)
 *Salão interno com lareira acesa e iluminação dinâmica suave, vigamentos em madeira escura, mesas com canecos e pratos, balcão de serviço e sistema de corte de teto.*
 
 | Imagem 2D Original | Reconstrução 3D Procedural |
@@ -47,9 +56,9 @@ Ferramenta web moderna desenvolvida em **React 18 + TypeScript + Three.js** que 
 
 Abra o modal de gerenciamento a qualquer momento para navegar pelo catálogo ou salvar seu progresso:
 
-![Gerenciador de Mapas](docs/screenshots/map-manager-modal.png)
+![Gerenciador de Mapas](docs/screenshots/map-manager-regional.png)
 
-- **8 Mapas Pré-definidos Integrados:** Portos, cidades medievais, ruínas com santuário central, tavernas fechadas e florestas densas.
+- **9 Mapas Pré-definidos Integrados:** Vale dos Rios regional, portos, cidades medievais, ruínas com santuário central, tavernas fechadas e florestas densas.
 - **Meus Mapas Salvos (Persistência Local):** Salve no `localStorage` do navegador com nome customizado e contagem de props.
 - **Importação & Exportação:** Baixe ou carregue projetos em `.isomap.json` e arquivos de especificação leves `.isodsl.json`.
 - **Drag & Drop:** Arraste qualquer nova ilustração 2D diretamente na janela para reconstruir do zero.

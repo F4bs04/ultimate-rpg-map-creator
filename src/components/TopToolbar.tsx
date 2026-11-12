@@ -51,6 +51,8 @@ const PROP_LABELS: Record<PropGeneratorType, string> = {
   bookshelf: 'Estante / Armário',
   wall_sconce: 'Arandela Luz',
   card_25d: 'Card 2.5D',
+  cloud: 'Nuvem Volumétrica',
+  watermill: 'Roda Moinho D\'água',
 };
 
 export const TopToolbar: React.FC<TopToolbarProps> = ({

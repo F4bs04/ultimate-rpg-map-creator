@@ -57,6 +57,7 @@ import {
 import { createPortoRustymapsScene } from '../portoRustymapsScene';
 import { createRuinasRioMediumScene } from '../ruinasRioScene';
 import { createTavernaMedievalScene } from '../tavernaMedievalScene';
+import { createValeRegionalScene } from '../valeRegionalScene';
 import { createVilaMedievalScene } from '../vilaMedievalScene';
 import { extractAlphaCutoutRGBA } from '../cutoutHarvester';
 import { buildWorldNodePipelineSummary } from '../proceduralNodes';
@@ -275,6 +276,8 @@ describe('compiler (Gramática de Footprints & Props img2obj)', () => {
       'bookshelf',
       'wall_sconce',
       'card_25d',
+      'cloud',
+      'watermill',
     ];
     for (const generator of types) {
       const geom = buildPropGeometry({
@@ -869,6 +872,43 @@ describe('worldKit & worldBuilder (Absorção Multi-Imagem & Escalas Pequeno/Mé
     const world = buildMultiScaleWorld(port, undefined);
     expect(world.gridRadius).toBe(2);
     expect(world.chunks.length).toBe(25);
+  });
+
+  it('compila Vale dos Rios & Província Agrícola em escala Grande 9x9 (81 chunks) com nuvens, pontes e fazendas', () => {
+    const vale = createValeRegionalScene();
+    expect(vale.meta.aspectRatio).toBeCloseTo(742 / 960, 4);
+    expect(vale.terrain.width).toBeCloseTo(123.667, 2);
+    expect(vale.terrain.depth).toBe(160);
+    expect(vale.terrain.waterEnabled).toBe(true);
+    expect(vale.worldGrammar.scale).toBe('large');
+
+    const bridges = vale.structures.filter((s) => s.semanticTag === 'bridge');
+    const clouds = vale.props.filter((p) => p.generator === 'cloud');
+    const watermills = vale.props.filter((p) => p.generator === 'watermill');
+    const boats = vale.props.filter((p) => p.generator === 'boat');
+    const wells = vale.props.filter((p) => p.generator === 'well');
+
+    expect(bridges.length).toBeGreaterThanOrEqual(3);
+    expect(clouds.length).toBe(5);
+    expect(watermills.length).toBe(1);
+    expect(boats.length).toBeGreaterThanOrEqual(4);
+    expect(wells.length).toBeGreaterThanOrEqual(5);
+
+    // Compila malhas de todas as estruturas e props
+    for (const st of vale.structures) {
+      const b = buildStructureArchitectureBundle(st);
+      expect(b.wallsGeom.getAttribute('position').count).toBeGreaterThan(0);
+    }
+    for (const p of vale.props) {
+      const geom = buildPropGeometry(p);
+      expect(geom.getAttribute('position').count).toBeGreaterThan(0);
+    }
+
+    // Testa expansão para mundo aberto Grande (9x9 = 81 chunks)
+    const world = buildMultiScaleWorld(vale, undefined);
+    expect(world.gridRadius).toBe(4);
+    expect(world.chunks.length).toBe(81);
+    expect(world.worldProps.length).toBeGreaterThan(100);
   });
 });
 

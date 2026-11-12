@@ -430,6 +430,8 @@ export const RightInspector: React.FC = () => {
                 <option value="bookshelf">Estante / Armário</option>
                 <option value="wall_sconce">Arandela Luz</option>
                 <option value="card_25d">Card 2.5D</option>
+                <option value="cloud">Nuvem Volumétrica</option>
+                <option value="watermill">Roda Moinho D'água</option>
               </select>
             </div>
             <div>

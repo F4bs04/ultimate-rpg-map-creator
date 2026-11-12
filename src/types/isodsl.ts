@@ -60,7 +60,9 @@ export type PropGeneratorType =
   | 'fireplace'
   | 'bookshelf'
   | 'wall_sconce'
-  | 'card_25d';
+  | 'card_25d'
+  | 'cloud'
+  | 'watermill';
 
 export type HeightMode = 'luminance' | 'semantic_outdoor' | 'ai_depth';
 
